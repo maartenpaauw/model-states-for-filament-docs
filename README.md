@@ -140,8 +140,8 @@ Instead, you can set the credentials on the Composer Package Authentication scre
 
 namespace App\States;
 
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\Concerns\ProvidesSpatieStateToFilament;
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\Contracts\FilamentSpatieState;
+use Maartenpaauw\Filament\ModelStates\Concerns\ProvidesSpatieStateToFilament;
+use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieState;
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
 
@@ -173,8 +173,8 @@ Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-wi
 
 namespace App\States;
 
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\Concerns\ProvidesSpatieTransitionToFilament;
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\Contracts\FilamentSpatieTransition;
+use Maartenpaauw\Filament\ModelStates\Concerns\ProvidesSpatieTransitionToFilament;
+use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieTransition;
 use Spatie\ModelStates\Transition;
 
 /**
@@ -259,8 +259,8 @@ use Filament\Support\Colors\Color;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\Concerns\ProvidesSpatieTransitionToFilament;
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\Contracts\FilamentSpatieTransition;
+use Maartenpaauw\Filament\ModelStates\Concerns\ProvidesSpatieTransitionToFilament;
+use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieTransition;
 use Spatie\ModelStates\Transition;
 
 /**
@@ -319,7 +319,7 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 ### State Action
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateAction;
+use Maartenpaauw\Filament\ModelStates\StateAction;
 
 // ...
 
@@ -334,7 +334,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
 ### State Column
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateColumn;
+use Maartenpaauw\Filament\ModelStates\StateColumn;
 
 // ...
 
@@ -349,7 +349,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/tables/columns/getting
 ### State Entry
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateEntry;
+use Maartenpaauw\Filament\ModelStates\StateEntry;
 
 // ...
 
@@ -364,7 +364,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/infolists/entries/gett
 ### State Export Column
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateExportColumn;
+use Maartenpaauw\Filament\ModelStates\StateExportColumn;
 
 // ...
 
@@ -379,7 +379,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/actions/prebuilt-actio
 ### State Group
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateGroup;
+use Maartenpaauw\Filament\ModelStates\StateGroup;
 
 // ...
 
@@ -399,7 +399,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/tables/grouping).
 > relying on `Transition` classes and `StateChanged` events.
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateSelect;
+use Maartenpaauw\Filament\ModelStates\StateSelect;
 
 // ...
 
@@ -413,7 +413,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/select).
 ### State Select Filter
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateSelectFilter;
+use Maartenpaauw\Filament\ModelStates\StateSelectFilter;
 
 // ...
 
@@ -428,7 +428,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/select)
 ### State Table Action
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateTableAction;
+use Maartenpaauw\Filament\ModelStates\StateTableAction;
 
 // ...
 
@@ -443,7 +443,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions).
 ### State Tabs
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateTabs;
+use Maartenpaauw\Filament\ModelStates\StateTabs;
 
 // ...
 
@@ -465,7 +465,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listi
 > you are sure you are not relying on `Transition` classes and `StateChanged` events.
 
 ```php
-use Maartenpaauw\SpatieLaravelModelStatesPlugin\StateToggleButtons;
+use Maartenpaauw\Filament\ModelStates\StateToggleButtons;
 
 // ...
 
