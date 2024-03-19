@@ -124,7 +124,7 @@ You can see your credentials in your [Anystack.sh](https://anystack.sh/) account
 details next to Model states for Filament.
 
 > [!IMPORTANT]
-> Make sure the `auth.json` file is in .gitignore to avoid leaking credentials into your git history.
+> Make sure the `auth.json` file is in `.gitignore` to avoid leaking credentials into your git history.
 
 If you are using [Laravel Forge](http://forge.laravel.com/), you don't need to create the `auth.json `file manually.
 Instead, you can set the credentials on the Composer Package Authentication screen of your server.
