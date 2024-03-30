@@ -272,6 +272,10 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 
 #### Optional Label, Color and Icon
 
+By default, the name of the state class is used as a label (example `FailedState` will have the label `Failed`), it has no color and no icon. If you want a different label, color or an icon; you have to implement the `HasLabel`, `HasColor` or `HasIcon` interface.
+
+Here is an example `Failed` state with `HasLabel`, `HasColor` and `HasIcon` implemented.
+
 ```php
 <?php
 
@@ -300,6 +304,10 @@ final class Failed extends PaymentState implements HasLabel, HasColor, HasIcon
     }
 }
 ```
+
+By default, "Mark as" followed by the name of the destination state is used as the transition label. Like states, it has no color or icon. If you want a different label, or if you want to use a color or icon; you have to implement the `HasLabel`, `HasColor` or `HasIcon` interface.
+
+Here is an example `PendingToFailed` transtition with `HasLabel`, `HasColor` and `HasIcon` implemented.
 
 ```php
 <?php
