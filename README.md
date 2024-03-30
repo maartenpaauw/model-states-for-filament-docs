@@ -7,7 +7,7 @@
 ## Introduction
 
 Model states for Filament is a powerful package that seamlessly integrates model states from Spatie Laravel model states
-into the Filament UI. With this package, transitioning, listing and filtering states becomes an effortless task.
+into the [Filament](https://filamentphp.com) UI. With this package, transitioning, listing and filtering states becomes an effortless task.
 
 ## Example
 
@@ -27,7 +27,7 @@ Model states for Filament comes packed with a range of features to enhance your 
 
 TODO: Aanvullen van features.
 
-- Spatie Laravel model states package support out-of-the-box.
+- [Spatie Laravel model states](https://spatie.be/docs/laravel-model-states/v2/01-introduction) package support out-of-the-box.
 - Compatible with dark mode.
 
 ## Screenshots
@@ -131,9 +131,21 @@ Instead, you can set the credentials on the Composer Package Authentication scre
 
 ## Setup
 
+In this paragraph we list the steps you need to follow to get up and running.
+
 ### Spatie
 
+The Model states for Filament comes with support for Spatie Laravel model states out-of-the-box.
+
 #### State Preparation
+
+> [!TIP]
+> More information about state configuration can be found on the official
+Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states).
+
+When using Spatie Laravel model states, there is an abstract state class. This abstract state class need some modifications. We have to implement the `FilamentSpatieState` interface and use the `ProvidesSpatieStateToFilament` trait.
+
+Here is an example `PaymentState` abstract class with the modification in place.
 
 ```php
 <?php
@@ -162,11 +174,15 @@ abstract class PaymentState extends State implements FilamentSpatieState
 }
 ```
 
-> [!TIP]
-> More information about state configuration can be found on the official
-Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states).
-
 #### Transition Preparation
+
+> [!TIP]
+> More information about transition configuration can be found on the official
+Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
+
+Spatie Laravel model states offers support for custom transition classes. All custom transition classes must implement the `FilamentSpatieTransition` interface and use the `ProvidesSpatieTransitionToFilament` trait before they can be used within Filament.
+
+Here is an example `PendingToFailed` transition class with the modification is place.
 
 ```php
 <?php
@@ -186,10 +202,49 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
     
     public function __construct(
         private readonly Payment $payment,
-        private readonly string $message = '',
     ) {
     }
     
+    public function handle(): Payment
+    {
+        $this->payment->state = new Failed($this->payment);
+        $this->payment->failed_at = now();
+
+        $this->payment->save();
+
+        return $this->payment;
+    }
+}
+```
+
+##### Additional Transition Data
+
+Most of the time we need additional data before we can transition to a new state. With the `PendingToFailed` transition in mind, it would be nice to store an error message explaining why the state was transitioned to failed. By adding a `form` method to the transition class, there will be a form displayed when starting the transition.
+
+Here is an example `PendingToFailed` transition class with the form is place. This transition will display a message textarea when the `StateAction` button is clicked.
+
+```php
+<?php
+
+namespace App\States;
+
+use Maartenpaauw\Filament\ModelStates\Concerns\ProvidesSpatieTransitionToFilament;
+use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieTransition;
+use Spatie\ModelStates\Transition;
+
+/**
+ * @implements FilamentSpatieTransition<Payment>
+ */
+final class PendingToFailed extends Transition implements FilamentSpatieTransition
+{
+    use ProvidesSpatieTransitionToFilament;
+
+    public function __construct(
+        private readonly Payment $payment,
+        private readonly string $message = '',
+    ) {
+    }
+
     public function handle(): Payment
     {
         $this->payment->state = new Failed($this->payment);
@@ -200,7 +255,7 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 
         return $this->payment;
     }
-    
+
     public function form(): array | Closure | null
     {
         return [
@@ -214,10 +269,6 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
     }
 }
 ```
-
-> [!TIP]
-> More information about transition configuration can be found on the official
-Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
 
 #### Optional Label, Color and Icon
 
@@ -475,6 +526,65 @@ StateToggleButtons::make('state');
 > [!TIP]
 > More information about toggle buttons can be found on the official
 Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/toggle-buttons).
+
+## Advanced
+
+### Custom State Manager
+
+Do you want to use a different model state manager than Spatie Laravel model state? This is totally possible. You have to create your own manager by creating a new class that implements the `Manager` interface.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Maartenpaauw\Filament\ModelStates\Contracts;
+
+use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Support\Collection;
+
+interface Manager
+{
+    public static function make(Config $config): self;
+
+    public function currentState(): State;
+
+    public function defaultState(): ?State;
+
+    /**
+     * @return Collection<string, State>
+     */
+    public function allStates(): Collection;
+
+    public function transformState(mixed $state): State;
+
+    public function getTransition(PendingTransition $pendingTransition): Transition;
+
+    public function isValidPendingTransition(PendingTransition $pendingTransition): bool;
+
+    public function isInvalidPendingTransition(PendingTransition $pendingTransition): bool;
+
+    public function executePendingTransition(PendingTransition $pendingTransition): void;
+
+    public function scope(State $state): Scope;
+
+    public function validationRule(bool $required = true): ValidationRule;
+}
+```
+
+After creating a custom manager, you can specify per component which manager to use. For example when using the state action
+
+```php
+use App\States\CustomManager;
+use Maartenpaauw\Filament\ModelStates\StateAction;
+
+// ...
+
+StateAction::make('fail')
+    ->manager(CustomManager::class)
+    ->transitionTo(Failed::class);
+```
 
 ## Need Assistance?
 
