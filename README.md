@@ -12,10 +12,10 @@ an effortless task.
 
 ## Example
 
-Consider a scenario where you're managing an e-commerce platform with various product states like "draft", "published",
-and "archived". With this plug-in, you can effortlessly list all products based on their states, apply filters to
+Consider a scenario where you're managing an e-commerce platform with various product states like `draft`, `published`,
+and `archived`. With this plug-in, you can effortlessly list all products based on their states, apply filters to
 quickly locate specific products in each state, and seamlessly transition between states directly within Filament's
-intuitive interface. For instance, you can effortlessly move a product from "draft" to "published" with just a few
+intuitive interface. For instance, you can effortlessly move a product from `draft` to `published` with just a few
 clicks, streamlining your workflow and enhancing productivity.
 
 **This plugin leverages the robust capabilities of Filament PHP and support of Spatie Laravel model state
