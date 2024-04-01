@@ -7,7 +7,8 @@
 ## Introduction
 
 Model states for Filament is a powerful package that seamlessly integrates model states from Spatie Laravel model states
-into the [Filament](https://filamentphp.com) UI. With this package, transitioning, listing and filtering states becomes an effortless task.
+into the [Filament](https://filamentphp.com) UI. With this package, transitioning, listing and filtering states becomes
+an effortless task.
 
 ## Example
 
@@ -27,7 +28,12 @@ Model states for Filament comes packed with a range of features to enhance your 
 
 TODO: Aanvullen van features.
 
-- [Spatie Laravel model states](https://spatie.be/docs/laravel-model-states/v2/01-introduction) package support out-of-the-box.
+- Listing states.
+- Filtering states.
+- Transition to valid states using select or toggle buttons.
+- Transition to valid states using actions.
+- [Spatie Laravel model states](https://spatie.be/docs/laravel-model-states/v2/01-introduction) package support
+  out-of-the-box.
 - Compatible with dark mode.
 
 ## Screenshots
@@ -131,7 +137,8 @@ Instead, you can set the credentials on the Composer Package Authentication scre
 
 ## Setup
 
-In this paragraph we list the steps you need to follow to get up and running.
+In this paragraph we list the steps you need to follow to get up and running with the out-of-the-box supported Spatie
+integration.
 
 ### Spatie
 
@@ -141,9 +148,11 @@ The Model states for Filament comes with support for Spatie Laravel model states
 
 > [!TIP]
 > More information about state configuration can be found on the official
-Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states).
+> Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states).
 
-When using Spatie Laravel model states, there is an abstract state class. This abstract state class need some modifications. We have to implement the `FilamentSpatieState` interface and use the `ProvidesSpatieStateToFilament` trait.
+When using Spatie Laravel model states, there is an abstract state class. This abstract state class need some
+modifications. We have to implement the `FilamentSpatieState` interface and use the `ProvidesSpatieStateToFilament`
+trait.
 
 Here is an example `PaymentState` abstract class with the modification in place.
 
@@ -178,9 +187,11 @@ abstract class PaymentState extends State implements FilamentSpatieState
 
 > [!TIP]
 > More information about transition configuration can be found on the official
-Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
+> Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
 
-Spatie Laravel model states offers support for custom transition classes. All custom transition classes must implement the `FilamentSpatieTransition` interface and use the `ProvidesSpatieTransitionToFilament` trait before they can be used within Filament.
+Spatie Laravel model states offers support for custom transition classes. All custom transition classes must implement
+the `FilamentSpatieTransition` interface and use the `ProvidesSpatieTransitionToFilament` trait before they can be used
+within Filament.
 
 Here is an example `PendingToFailed` transition class with the modification is place.
 
@@ -219,9 +230,12 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 
 ##### Additional Transition Data
 
-Most of the time we need additional data before we can transition to a new state. With the `PendingToFailed` transition in mind, it would be nice to store an error message explaining why the state was transitioned to failed. By adding a `form` method to the transition class, there will be a form displayed when starting the transition.
+Most of the time we need additional data before we can transition to a new state. With the `PendingToFailed` transition
+in mind, it would be nice to store an error message explaining why the state was transitioned to failed. By adding
+a `form` method to the transition class, there will be a form displayed when starting the transition.
 
-Here is an example `PendingToFailed` transition class with the form is place. This transition will display a message textarea when the `StateAction` button is clicked.
+Here is an example `PendingToFailed` transition class with the form is place. This transition will display a message
+textarea when the `StateAction` button is clicked.
 
 ```php
 <?php
@@ -272,7 +286,9 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 
 #### Optional Label, Color and Icon
 
-By default, the name of the state class is used as a label (example `FailedState` will have the label `Failed`), it has no color and no icon. If you want a different label, color or an icon; you have to implement the `HasLabel`, `HasColor` or `HasIcon` interface.
+By default, the name of the state class is used as a label (example `FailedState` will have the label `Failed`), it has
+no color and no icon. If you want a different label, color or an icon; you have to implement the `HasLabel`, `HasColor`
+or `HasIcon` interface.
 
 Here is an example `Failed` state with `HasLabel`, `HasColor` and `HasIcon` implemented.
 
@@ -305,7 +321,9 @@ final class Failed extends PaymentState implements HasLabel, HasColor, HasIcon
 }
 ```
 
-By default, "Mark as" followed by the name of the destination state is used as the transition label. Like states, it has no color or icon. If you want a different label, or if you want to use a color or icon; you have to implement the `HasLabel`, `HasColor` or `HasIcon` interface.
+By default, "Mark as" followed by the name of the destination state is used as the transition label. Like states, it has
+no color or icon. If you want a different label, or if you want to use a color or icon; you have to implement
+the `HasLabel`, `HasColor` or `HasIcon` interface.
 
 Here is an example `PendingToFailed` transtition with `HasLabel`, `HasColor` and `HasIcon` implemented.
 
@@ -375,6 +393,48 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 }
 ```
 
+### State Column
+
+When using the `StateColumn` component, this plug-in will automatically generate a label for the current state. If you
+want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateColumn` component is based on the `TextColumn` component, all the familiar `TextColumn` modifiers can
+be used (e.g. `badge()`).
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateColumn;
+
+// ...
+
+StateColumn::make('state')
+    ->badge();
+```
+
+> [!TIP]
+> More information about columns can be found on the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/columns/getting-started).
+
+### State Entry
+
+When using the `StateEntry` component, this plug-in will automatically generate a label for the current state. If you
+want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateEntry` component is based on the `TextEntry` component, all the familiar `TextEntry` modifiers can be
+used (e.g. `badge()`).
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateEntry;
+
+// ...
+
+StateEntry::make('state')
+    ->badge();
+```
+
+> [!TIP]
+> More information about entries can be found on the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/infolists/entries/getting-started).
+
 ### State Action
 
 ```php
@@ -388,37 +448,7 @@ StateAction::make('fail')
 
 > [!TIP]
 > More information about actions can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
-
-### State Column
-
-```php
-use Maartenpaauw\Filament\ModelStates\StateColumn;
-
-// ...
-
-StateColumn::make('state')
-    ->badge();
-```
-
-> [!TIP]
-> More information about columns can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/tables/columns/getting-started).
-
-### State Entry
-
-```php
-use Maartenpaauw\Filament\ModelStates\StateEntry;
-
-// ...
-
-StateEntry::make('state')
-    ->badge();
-```
-
-> [!TIP]
-> More information about entries can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/infolists/entries/getting-started).
+> Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
 
 ### State Export Column
 
@@ -433,7 +463,7 @@ StateExportColumn::make('state')
 
 > [!TIP]
 > More information about exports can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/export).
+> Filament [documentation](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/export).
 
 ### State Group
 
@@ -448,7 +478,7 @@ StateGroup::make('state')
 
 > [!TIP]
 > More information about groups can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/tables/grouping).
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/grouping).
 
 ### State Select
 
@@ -467,7 +497,7 @@ StateSelect::make('state');
 
 > [!TIP]
 > More information about selects can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/select).
+> Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/select).
 
 ### State Select Filter
 
@@ -482,7 +512,7 @@ StateSelectFilter::make('state')
 
 > [!TIP]
 > More information about select filters can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/select).
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/select).
 
 ### State Table Action
 
@@ -497,7 +527,7 @@ StateTableAction::make('fail')
 
 > [!TIP]
 > More information about table actions can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions).
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions).
 
 ### State Tabs
 
@@ -514,7 +544,7 @@ public function getTabs(): array
 
 > [!TIP]
 > More information about state tabs can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
+> Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
 
 ### State Toggle Buttons
 
@@ -533,13 +563,14 @@ StateToggleButtons::make('state');
 
 > [!TIP]
 > More information about toggle buttons can be found on the official
-Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/toggle-buttons).
+> Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/toggle-buttons).
 
 ## Advanced
 
 ### Custom State Manager
 
-Do you want to use a different model state manager than Spatie Laravel model state? This is totally possible. You have to create your own manager by creating a new class that implements the `Manager` interface.
+Do you want to use a different model state manager than Spatie Laravel model state? This is totally possible. You have
+to create your own manager by creating a new class that implements the `Manager` interface.
 
 ```php
 <?php
@@ -581,7 +612,8 @@ interface Manager
 }
 ```
 
-After creating a custom manager, you can specify per component which manager to use. For example when using the state action
+After creating a custom manager, you can specify per component which manager to use. For example when using the state
+action, you can chain the `->manager(...)` method after making the `StateAction`.
 
 ```php
 use App\States\CustomManager;
