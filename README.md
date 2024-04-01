@@ -6,15 +6,20 @@
 
 ## Introduction
 
-Model states for Filament is a powerful package that seamlessly integrates model states from Spatie Laravel model states
-into the [Filament](https://filamentphp.com) UI. With this package, transitioning, listing and filtering states becomes
+Model states for Filament is a powerful plug-in that seamlessly integrates model states from Spatie Laravel model states
+into the [Filament](https://filamentphp.com) UI. With this plug-in, transitioning, listing and filtering states becomes
 an effortless task.
 
 ## Example
 
-TODO: Tekst over belangrijkste features met praktijk voorbeeld.
+Consider a scenario where you're managing an e-commerce platform with various product states like "draft", "published",
+and "archived". With this plug-in, you can effortlessly list all products based on their states, apply filters to
+quickly locate specific products in each state, and seamlessly transition between states directly within Filament's
+intuitive interface. For instance, you can effortlessly move a product from "draft" to "published" with just a few
+clicks, streamlining your workflow and enhancing productivity.
 
-**This package empowers you to perform such action with ease, all within Filament!**
+**This plugin leverages the robust capabilities of Filament PHP and support of Spatie Laravel model state
+out-of-the-box, providing a seamless solution for managing model states with efficiency and ease.**
 
 ### Demo video
 
@@ -110,7 +115,7 @@ To clarify, the license key and fingerprint should be separated by a colon (`:`)
 
 #### Publishing
 
-The package offers English and Dutch translations. You can publish the language files if needed:
+The plug-in offers English and Dutch translations. You can publish the language files if needed:
 
 ```shell
 php artisan vendor:publish --tag="model-states-for-filament-translations"
@@ -187,7 +192,8 @@ abstract class PaymentState extends State implements FilamentSpatieState
 
 > [!TIP]
 > More information about transition configuration can be found on the official
-> Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
+>
+Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
 
 Spatie Laravel model states offers support for custom transition classes. All custom transition classes must implement
 the `FilamentSpatieTransition` interface and use the `ProvidesSpatieTransitionToFilament` trait before they can be used
@@ -395,6 +401,10 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 
 ### State Column
 
+The `StateColumn` will display the related model state within a table.
+
+TODO: afbeelding van een tabel met state hier.
+
 When using the `StateColumn` component, this plug-in will automatically generate a label for the current state. If you
 want to have a custom label, you can implement the `HasLabel` interface.
 
@@ -415,6 +425,10 @@ StateColumn::make('state')
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/columns/getting-started).
 
 ### State Entry
+
+The `StateEntry` will display the related model state within an infolist.
+
+TODO: afbeelding van een infolist met state hier.
 
 When using the `StateEntry` component, this plug-in will automatically generate a label for the current state. If you
 want to have a custom label, you can implement the `HasLabel` interface.
@@ -451,6 +465,16 @@ StateAction::make('fail')
 > Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
 
 ### State Export Column
+
+The `StateExportColumn` will add a column to Excel or CSV export will the related model state.
+
+TODO: afbeelding van een CSV-export met state hier.
+
+When using the `StateExportColumn` component, this plug-in will automatically generate a label for the current state. If
+you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateExportColumn` component is based on the `ExportColumn` component, all the familiar `ExportColumn`
+modifiers can be used (e.g. `label()`).
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateExportColumn;
@@ -544,7 +568,8 @@ public function getTabs(): array
 
 > [!TIP]
 > More information about state tabs can be found on the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
+>
+Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
 
 ### State Toggle Buttons
 
