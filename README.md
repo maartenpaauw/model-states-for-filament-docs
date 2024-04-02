@@ -409,12 +409,6 @@ The `StateColumn` will display the related model state within a table.
 
 TODO: afbeelding van een tabel met state hier.
 
-When using the `StateColumn` component, this plug-in will automatically generate a label for the current state. If you
-want to have a custom label, you can implement the `HasLabel` interface.
-
-Because the `StateColumn` component is based on the `TextColumn` component, all the familiar `TextColumn` modifiers can
-be used (e.g. `badge()`).
-
 ```php
 use Maartenpaauw\Filament\ModelStates\StateColumn;
 
@@ -423,6 +417,12 @@ use Maartenpaauw\Filament\ModelStates\StateColumn;
 StateColumn::make('state')
     ->badge();
 ```
+
+When using the `StateColumn` component, this plug-in will automatically generate a label for the current state. If you
+want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateColumn` component is based on the `TextColumn` component, all the familiar `TextColumn` modifiers can
+be used (e.g. `badge()`).
 
 > [!TIP]
 > More information about columns can be found on the official
@@ -434,12 +434,6 @@ The `StateEntry` will display the related model state within an infolist.
 
 TODO: afbeelding van een infolist met state hier.
 
-When using the `StateEntry` component, this plug-in will automatically generate a label for the current state. If you
-want to have a custom label, you can implement the `HasLabel` interface.
-
-Because the `StateEntry` component is based on the `TextEntry` component, all the familiar `TextEntry` modifiers can be
-used (e.g. `badge()`).
-
 ```php
 use Maartenpaauw\Filament\ModelStates\StateEntry;
 
@@ -448,6 +442,12 @@ use Maartenpaauw\Filament\ModelStates\StateEntry;
 StateEntry::make('state')
     ->badge();
 ```
+
+When using the `StateEntry` component, this plug-in will automatically generate a label for the current state. If you
+want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateEntry` component is based on the `TextEntry` component, all the familiar `TextEntry` modifiers can be
+used (e.g. `badge()`).
 
 > [!TIP]
 > More information about entries can be found on the official
@@ -475,12 +475,6 @@ The `StateExportColumn` will add a column to Excel or CSV export will the relate
 
 TODO: afbeelding van een CSV-export met state hier.
 
-When using the `StateExportColumn` component, this plug-in will automatically generate a label for the current state. If
-you want to have a custom label, you can implement the `HasLabel` interface.
-
-Because the `StateExportColumn` component is based on the `ExportColumn` component, all the familiar `ExportColumn`
-modifiers can be used (e.g. `label()`).
-
 ```php
 use Maartenpaauw\Filament\ModelStates\StateExportColumn;
 
@@ -489,6 +483,12 @@ use Maartenpaauw\Filament\ModelStates\StateExportColumn;
 StateExportColumn::make('state')
     ->label('State');
 ```
+
+When using the `StateExportColumn` component, this plug-in will automatically generate a label for the current state. If
+you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateExportColumn` component is based on the `ExportColumn` component, all the familiar `ExportColumn`
+modifiers can be used (e.g. `label()`).
 
 > [!TIP]
 > More information about exports can be found on the official
@@ -500,12 +500,6 @@ The `StateGroup` will add the functionality to group table records based on thei
 
 TODO: afbeelding van een gegroepeerde tabel hier invoegen.
 
-When using the `StateGroup` component, this plug-in will automatically generate a label for the current state. If
-you want to have a custom label, you can implement the `HasLabel` interface.
-
-Because the `StateGroup` component is based on the `Group` component, all the familiar `Group`
-modifiers can be used (e.g. `label()`).
-
 ```php
 use Maartenpaauw\Filament\ModelStates\StateGroup;
 
@@ -514,6 +508,12 @@ use Maartenpaauw\Filament\ModelStates\StateGroup;
 StateGroup::make('state')
     ->label('State');
 ```
+
+When using the `StateGroup` component, this plug-in will automatically generate a label for the current state. If
+you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateGroup` component is based on the `Group` component, all the familiar `Group`
+modifiers can be used (e.g. `label()`).
 
 > [!TIP]
 > More information about groups can be found on the official
@@ -530,10 +530,6 @@ the `StateSelect` is a form component which lists all states and disables invali
 
 TODO: afbeelding van een state select met daarin disabled states.
 
-When using the `StateSelect` component, this plug-in will automatically list all states using their generated class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
-
-Because the `StateSelect` is based on the `Select` component, all the familiar `Select` modifiers can be used (e.g. `native()`).
-
 ```php
 use Maartenpaauw\Filament\ModelStates\StateSelect;
 
@@ -541,6 +537,10 @@ use Maartenpaauw\Filament\ModelStates\StateSelect;
 
 StateSelect::make('state');
 ```
+
+When using the `StateSelect` component, this plug-in will automatically list all states using their generated class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateSelect` is based on the `Select` component, all the familiar `Select` modifiers can be used (e.g. `native()`).
 
 > [!TIP]
 > More information about selects can be found on the official
