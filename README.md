@@ -526,6 +526,14 @@ StateGroup::make('state')
 > classes and are directly saved to the database like regular fields. Only use this select when you are sure you are not
 > relying on `Transition` classes and `StateChanged` events.
 
+the `StateSelect` is a form component which lists all states and disables invalid state transitions. This component is meant for basic state transitions, which does not require other form fields.
+
+TODO: afbeelding van een state select met daarin disabled states.
+
+When using the `StateSelect` component, this plug-in will automatically list all states using their generated class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateSelect` is based on the `Select` component, all the familiar `Select` modifiers can be used (e.g. `native()`).
+
 ```php
 use Maartenpaauw\Filament\ModelStates\StateSelect;
 
