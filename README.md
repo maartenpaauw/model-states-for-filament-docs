@@ -491,6 +491,16 @@ StateExportColumn::make('state')
 
 ### State Group
 
+The `StateGroup` will add the functionality to group table records based on their status.
+
+TODO: afbeelding van een gegroepeerde tabel hier invoegen.
+
+When using the `StateGroup` component, this plug-in will automatically generate a label for the current state. If
+you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateGroup` component is based on the `Group` component, all the familiar `Group`
+modifiers can be used (e.g. `label()`).
+
 ```php
 use Maartenpaauw\Filament\ModelStates\StateGroup;
 
