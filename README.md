@@ -399,6 +399,10 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 }
 ```
 
+## Usage
+
+In this paragraph all available components and their features are listed.
+
 ### State Column
 
 The `StateColumn` will display the related model state within a table.
