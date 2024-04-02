@@ -452,6 +452,7 @@ StateEntry::make('state')
 ### State Action
 
 ```php
+use App\States\Failed;
 use Maartenpaauw\Filament\ModelStates\StateAction;
 
 // ...
@@ -551,6 +552,7 @@ StateSelectFilter::make('state')
 ### State Table Action
 
 ```php
+use App\States\Failed;
 use Maartenpaauw\Filament\ModelStates\StateTableAction;
 
 // ...
@@ -652,6 +654,7 @@ action, you can chain the `->manager(...)` method after making the `StateAction`
 
 ```php
 use App\States\CustomManager;
+use App\States\Failed;
 use Maartenpaauw\Filament\ModelStates\StateAction;
 
 // ...
