@@ -518,8 +518,9 @@ modifiers can be used (e.g. `label()`).
 > classes and are directly saved to the database like regular fields. Only use this select when you are sure you are not
 > relying on `Transition` classes and `StateChanged` events.
 
-the `StateSelect` is a form component which makes it possible to select valid state transitions, all other invalid state
-transitions are disabled. This component is meant for basic state transitions, which does not require other form fields.
+The `StateSelect` is a form component which makes it possible to select valid state transitions, all other invalid state
+transitions are disabled. This component is meant for basic state transitions, which does not require additional form
+fields.
 
 TODO: afbeelding van een state select met daarin disabled states.
 
@@ -616,6 +617,12 @@ public function getTabs(): array
 > the `Transition` classes and are directly saved to the database like regular fields. Only use this toggle button when
 > you are sure you are not relying on `Transition` classes and `StateChanged` events.
 
+Like the `StateSelect`, the `StateToggleButtons` is a form component which makes it possible to select valid state
+transitions, all other invalid state transitions are disabled. This component is meant for basic state transitions,
+which does not require additional form fields.
+
+TODO: afbeelding van een state select met daarin disabled states.
+
 ```php
 use Maartenpaauw\Filament\ModelStates\StateToggleButtons;
 
@@ -623,6 +630,12 @@ use Maartenpaauw\Filament\ModelStates\StateToggleButtons;
 
 StateToggleButtons::make('state');
 ```
+
+When using the `StateToggleButtons` component, this plug-in will automatically list all states using their generated
+class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateToggleButtons` is based on the `ToggleButtons` component, all the familiar `ToggleButtons` modifiers
+can be used (e.g. `inline()`).
 
 > [!TIP]
 > More information about toggle buttons can be found on the official
