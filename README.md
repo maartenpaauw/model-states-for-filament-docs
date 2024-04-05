@@ -85,11 +85,6 @@ Once the repository is added, you can install Model states for Filament like any
 
 ```shell
 composer require maartenpaauw/model-states-for-filament
- 
-Loading composer repositories with package information
-Authentication required (model-states-for-filament.composer.sh):
-Username: [your-email]
-Password: [your-license-key:your-domain]
 ```
 
 You will be prompted to provide your username and password. The username will be your email address and the password
