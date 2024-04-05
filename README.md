@@ -31,8 +31,6 @@ Check out this video demonstrating how straightforward it is to transition a sta
 
 Model states for Filament comes packed with a range of features to enhance your experience:
 
-TODO: Aanvullen van features.
-
 - Listing states.
 - Filtering states.
 - Transition to valid states using select or toggle buttons.
@@ -191,9 +189,8 @@ abstract class PaymentState extends State implements FilamentSpatieState
 #### Transition Preparation
 
 > [!TIP]
-> More information about transition configuration can be found on the official
->
-Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
+> More information about transition configuration can be found on the official Spatie
+> [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
 
 Spatie Laravel model states offers support for custom transition classes. All custom transition classes must implement
 the `FilamentSpatieTransition` interface and use the `ProvidesSpatieTransitionToFilament` trait before they can be used
