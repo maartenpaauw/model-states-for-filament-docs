@@ -148,8 +148,8 @@ The Model states for Filament comes with support for Spatie Laravel model states
 > More information about state configuration can be found on the official
 > Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states).
 
-When using Spatie Laravel model states, there is an abstract state class. This abstract state class need some
-modifications. We have to implement the `FilamentSpatieState` interface and use the `ProvidesSpatieStateToFilament`
+When using Spatie Laravel model states, there are multiple abstract state classes. These abstract state classes need
+some modifications. We have to implement the `FilamentSpatieState` interface and use the `ProvidesSpatieStateToFilament`
 trait.
 
 Here is an example `PaymentState` abstract class with the modification in place.
@@ -463,7 +463,7 @@ StateAction::make('fail')
 
 ### State Export Column
 
-The `StateExportColumn` will add a column to Excel or CSV export will the related model state.
+The `StateExportColumn` will add a column to Excel or CSV export will the related model state as value.
 
 TODO: afbeelding van een CSV-export met state hier.
 
@@ -514,11 +514,12 @@ modifiers can be used (e.g. `label()`).
 ### State Select
 
 > [!CAUTION]
-> Using a state select in combination with the Spatie integration states aren't transitioned using the `Transition`
+> Using a state select in combination with the Spatie integration, states aren't transitioned using the `Transition`
 > classes and are directly saved to the database like regular fields. Only use this select when you are sure you are not
 > relying on `Transition` classes and `StateChanged` events.
 
-the `StateSelect` is a form component which lists all states and disables invalid state transitions. This component is meant for basic state transitions, which does not require other form fields.
+the `StateSelect` is a form component which makes it possible to select valid state transitions, all other invalid state
+transitions are disabled. This component is meant for basic state transitions, which does not require other form fields.
 
 TODO: afbeelding van een state select met daarin disabled states.
 
@@ -530,9 +531,11 @@ use Maartenpaauw\Filament\ModelStates\StateSelect;
 StateSelect::make('state');
 ```
 
-When using the `StateSelect` component, this plug-in will automatically list all states using their generated class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
+When using the `StateSelect` component, this plug-in will automatically list all states using their generated class name
+label. If you want to have a custom label, you can implement the `HasLabel` interface.
 
-Because the `StateSelect` is based on the `Select` component, all the familiar `Select` modifiers can be used (e.g. `native()`).
+Because the `StateSelect` is based on the `Select` component, all the familiar `Select` modifiers can be used (
+e.g. `native()`).
 
 > [!TIP]
 > More information about selects can be found on the official
@@ -571,6 +574,11 @@ StateTableAction::make('fail')
 
 ### State Tabs
 
+The `StateTabs` component can be used to filter records using tabs. Besides the state tabs, there will also be an "All"
+tab to list all records. The state tabs are alphabetically ordered.
+
+TODO: afbeelding van de state tabs.
+
 ```php
 use Maartenpaauw\Filament\ModelStates\StateTabs;
 
@@ -582,10 +590,24 @@ public function getTabs(): array
 }
 ```
 
+If you wish to not include the "All" tab mentioned above, you can chain the `includeAllTab(false)` method.
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateTabs;
+
+// ...
+
+public function getTabs(): array
+{
+    StateTabs::make($this->getModel())
+        ->includeAllTab(false)
+        ->toArray();
+}
+```
+
 > [!TIP]
-> More information about state tabs can be found on the official
->
-Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
+> More information about state tabs can be found on the official Filament
+> [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
 
 ### State Toggle Buttons
 
