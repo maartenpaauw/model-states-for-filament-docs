@@ -286,6 +286,68 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 > Because the plug-in needs to create transition instances to determine if there is a `form`, all constructor properties
 > need a default value.
 
+By default, this plug-in will map the form component names to their constructor property names. With the
+previous `PendingToFailed` in mind, the `message` textarea input will end up in constructor property `$message`. If you
+wish to do any modifications before creating the transition instance, you can overwrite the static method `fill`.
+
+For example prefixing the `message`:
+
+```php
+<?php
+
+namespace App\States;
+
+use Illuminate\Support\Arr;
+use Maartenpaauw\Filament\ModelStates\Concerns\ProvidesSpatieTransitionToFilament;
+use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieTransition;
+use Spatie\ModelStates\Transition;
+
+/**
+ * @implements FilamentSpatieTransition<Payment>
+ */
+final class PendingToFailed extends Transition implements FilamentSpatieTransition
+{
+    use ProvidesSpatieTransitionToFilament;
+
+    public function __construct(
+        private readonly Payment $payment,
+        private readonly string $message = '',
+    ) {
+    }
+
+    public static function fill(Model $model, array $formData): SpatieTransition
+    {
+        return new self(
+            payment: $model,
+            message: 'The transition failed because: '.Arr::get($formData, 'message'),
+        );
+    }
+
+    public function handle(): Payment
+    {
+        $this->payment->state = new Failed($this->payment);
+        $this->payment->failed_at = now();
+        $this->payment->error_message = $this->message;
+
+        $this->payment->save();
+
+        return $this->payment;
+    }
+
+    public function form(): array | Closure | null
+    {
+        return [
+            Textarea::make('message')
+                ->required()
+                ->minLength(1)
+                ->maxLength(1000)
+                ->rows(5)
+                ->helperText(__('This message will be sent to the customer.')),
+        ];
+    }
+}
+```
+
 #### Optional Label, Color and Icon
 
 By default, the name of the state class is used as a label (example `FailedState` will have the label `Failed`), it has
