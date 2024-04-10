@@ -19,13 +19,26 @@ within Filament's intuitive interface. For instance, you can effortlessly move a
 with just a few clicks, streamlining your workflow and enhancing productivity.
 
 **This plugin leverages the robust capabilities of Filament PHP and support of Spatie Laravel model state
-out-of-the-box, providing a seamless solution for managing model states with efficiency and ease.**
+out-of-the-box, providing a seamless solution for managing model states and transitions with efficiency and ease.**
 
 ### Demo video
 
-TODO: Video
+Check out this video demonstrating how straightforward it is to transition from one valid state to another using
+Filament, with the following transitions in mind:
 
-Check out this video demonstrating how straightforward it is to transition a state to another with Filament.
+```mermaid
+stateDiagram-v2
+    [*] --> New
+    New --> Processing
+    New --> Canceled
+    Processing --> Shipped
+    Processing --> Canceled
+    Shipped --> Delivered
+    Delivered --> [*]
+    Canceled --> [*]
+```
+
+TODO: Video
 
 ## Features
 
