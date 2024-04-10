@@ -319,7 +319,7 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
     {
         return new self(
             payment: $model,
-            message: 'The transition failed because: '.Arr::get($formData, 'message'),
+            message: 'The transition failed because: ' . Arr::get($formData, 'message'),
         );
     }
 
