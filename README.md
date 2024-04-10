@@ -282,6 +282,10 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 }
 ```
 
+> [!WARNING]
+> Because the plug-in needs to create transition instances to determine if there is a `form`, all constructor properties
+> need a default value.
+
 #### Optional Label, Color and Icon
 
 By default, the name of the state class is used as a label (example `FailedState` will have the label `Failed`), it has
