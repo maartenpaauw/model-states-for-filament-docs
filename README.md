@@ -124,14 +124,14 @@ following command:
 composer config http-basic.model-states-for-filament.composer.sh your_account_email your_license_key:fingerprint_domain
 ```
 
-You can see your credentials in your [Anystack.sh](https://anystack.sh/) account: Anystack -> Transactions -> View
-details next to Model states for Filament.
+You can see your credentials in your [Anystack.sh account](https://anystack.sh/): `Anystack -> Transactions -> View
+details` next to Model states for Filament.
 
 > [!IMPORTANT]
 > Make sure the `auth.json` file is in `.gitignore` to avoid leaking credentials into your git history.
 
 If you are using [Laravel Forge](http://forge.laravel.com/), you don't need to create the `auth.json `file manually.
-Instead, you can set the credentials on the Composer Package Authentication screen of your server.
+Instead, you can set the credentials on the `Composer Package Authentication` screen of your server.
 
 ## Setup
 
