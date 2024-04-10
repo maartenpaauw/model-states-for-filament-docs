@@ -44,8 +44,9 @@ TODO: Video
 
 Model states for Filament comes packed with a range of features to enhance your experience:
 
-- Listing states.
-- Filtering states.
+- Listing states within tables and exports.
+- Filtering records by states.
+- Grouping records by states.
 - Transition to valid states using select or toggle buttons components.
 - Transition to valid states using page and table actions.
 - [Spatie Laravel model states](https://spatie.be/docs/laravel-model-states/v2/01-introduction) package support
