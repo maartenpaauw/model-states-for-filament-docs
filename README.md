@@ -12,11 +12,11 @@ an effortless task.
 
 ## Example
 
-Consider a scenario where you're managing an e-commerce platform with various product states like `draft`, `published`,
-and `archived`. With this plug-in, you can effortlessly list all products based on their states, apply filters to
-quickly locate specific products in each state, and seamlessly transition between states directly within Filament's
-intuitive interface. For instance, you can effortlessly move a product from `draft` to `published` with just a few
-clicks, streamlining your workflow and enhancing productivity.
+Consider a scenario where you're managing an e-commerce platform with various order states like `new`, `processing`,
+`shipped`, `delivered` and `canceled`. With this plug-in, you can effortlessly list all products based on their states,
+apply filters to quickly locate specific orders in each state, and seamlessly transition between states directly
+within Filament's intuitive interface. For instance, you can effortlessly move an order from `processing` to `shipped`
+with just a few clicks, streamlining your workflow and enhancing productivity.
 
 **This plugin leverages the robust capabilities of Filament PHP and support of Spatie Laravel model state
 out-of-the-box, providing a seamless solution for managing model states with efficiency and ease.**
@@ -33,8 +33,8 @@ Model states for Filament comes packed with a range of features to enhance your 
 
 - Listing states.
 - Filtering states.
-- Transition to valid states using select or toggle buttons.
-- Transition to valid states using actions.
+- Transition to valid states using select or toggle buttons components.
+- Transition to valid states using page and table actions.
 - [Spatie Laravel model states](https://spatie.be/docs/laravel-model-states/v2/01-introduction) package support
   out-of-the-box.
 - Compatible with dark mode.
