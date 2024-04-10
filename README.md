@@ -319,8 +319,8 @@ final class Failed extends PaymentState implements HasLabel, HasColor, HasIcon
 }
 ```
 
-By default, "Mark as" followed by the name of the destination state is used as the transition label. Like states, it has
-no color or icon. If you want a different label, or if you want to use a color or icon; you have to implement
+By default, "Transition to" followed by the name of the destination state is used as the transition label. Like states,
+it has no color or icon. If you want a different label, or if you want to use a color or icon; you have to implement
 the `HasLabel`, `HasColor` or `HasIcon` interface.
 
 Here is an example `PendingToFailed` transtition with `HasLabel`, `HasColor` and `HasIcon` implemented.
