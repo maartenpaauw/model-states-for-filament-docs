@@ -447,6 +447,11 @@ used (e.g. `badge()`).
 
 ### State Action
 
+The `StateAction` component will let you transition a state to another valid state. Basic transitions will only show a
+confirmation dialogue, while advanced state transitions display an additional form before the transition can be done.
+
+TODO: afbeelding van state action met invoervelden.
+
 ```php
 use App\States\Failed;
 use Maartenpaauw\Filament\ModelStates\StateAction;
@@ -456,6 +461,14 @@ use Maartenpaauw\Filament\ModelStates\StateAction;
 StateAction::make('fail')
     ->transitionTo(Failed::class);
 ```
+
+When using the `StateAction` component, this plug-in will automatically generate a label for the transition. By
+default, "Transition to" followed by the name of the destination state is used as the transition label. If you
+want to have a custom label, you can publish the language files and change the `transition_to_state` translation or, you
+can implement the `HasLabel` interface.
+
+Because the `StateAction` component is based on the `Action` component, all the familiar `Action` modifiers can be
+used (e.g. `closeModalByClickingAway()`).
 
 > [!TIP]
 > More information about actions can be found on the official
@@ -559,6 +572,12 @@ StateSelectFilter::make('state')
 
 ### State Table Action
 
+The `StateTableAction` component will let you transition a state to another valid state. Basic transitions will only
+show a confirmation dialogue, while advanced state transitions display an additional form before the transition can be
+done.
+
+TODO: afbeelding van state action met invoervelden.
+
 ```php
 use App\States\Failed;
 use Maartenpaauw\Filament\ModelStates\StateTableAction;
@@ -568,6 +587,14 @@ use Maartenpaauw\Filament\ModelStates\StateTableAction;
 StateTableAction::make('fail')
     ->transitionTo(Failed::class);
 ```
+
+When using the `StateTableAction` component, this plug-in will automatically generate a label for the transition. By
+default, "Transition to" followed by the name of the destination state is used as the transition label. If you
+want to have a custom label, you can publish the language files and change the `transition_to_state` translation or, you
+can implement the `HasLabel` interface.
+
+Because the `StateTableAction` component is based on the `Action` component, all the familiar `Action` modifiers can be
+used (e.g. `closeModalByClickingAway()`).
 
 > [!TIP]
 > More information about table actions can be found on the official
