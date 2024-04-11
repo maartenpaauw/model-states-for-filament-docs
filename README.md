@@ -637,6 +637,10 @@ e.g. `native()`).
 
 ### State Select Filter
 
+The `StateSelectFilter` component will filter table records by the selected state.
+
+![Model states for Filament - State Select Filter](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select-filter.png "State Select Filter")
+
 ```php
 use Maartenpaauw\Filament\ModelStates\StateSelectFilter;
 
@@ -645,6 +649,12 @@ use Maartenpaauw\Filament\ModelStates\StateSelectFilter;
 StateSelectFilter::make('state')
     ->multiple();
 ```
+
+When using the `StateSelectFilter` component, this plug-in will automatically list all states using their generated class name
+label. If you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateSelectFilter` is based on the `SelectFilter` component, all the familiar `SelectFilter` modifiers can be used (
+e.g. `multiple()`).
 
 > [!TIP]
 > More information about select filters can be found on the official
