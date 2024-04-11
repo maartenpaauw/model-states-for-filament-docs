@@ -504,7 +504,7 @@ be used (e.g. `badge()`).
 
 The `StateEntry` will display the related model state within an infolist.
 
-TODO: afbeelding van een infolist met state hier.
+![Model states for Filament - State Entry](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-entry.png "State Entry")
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateEntry;
