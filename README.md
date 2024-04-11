@@ -615,7 +615,7 @@ The `StateSelect` is a form component which makes it possible to select valid st
 transitions are disabled. This component is meant for basic state transitions, which does not require additional form
 fields.
 
-TODO: afbeelding van een state select met daarin disabled states.
+![Model states for Filament - State Select](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select.png "State Select")
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateSelect;
@@ -728,7 +728,7 @@ Like the `StateSelect`, the `StateToggleButtons` is a form component which makes
 transitions, all other invalid state transitions are disabled. This component is meant for basic state transitions,
 which does not require additional form fields.
 
-TODO: afbeelding van een state select met daarin disabled states.
+![Model states for Filament - State Toggle Buttons](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-toggle-buttons.png "State Toggle Buttons")
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateToggleButtons;
