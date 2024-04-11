@@ -479,7 +479,7 @@ In this paragraph all available components and their features are listed.
 
 The `StateColumn` will display the related model state within a table.
 
-TODO: afbeelding van een tabel met state hier.
+![Model states for Filament - State Column](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-column.png "State Column")
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateColumn;
