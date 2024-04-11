@@ -583,7 +583,7 @@ modifiers can be used (e.g. `label()`).
 
 The `StateGroup` will add the functionality to group table records based on their status.
 
-TODO: afbeelding van een gegroepeerde tabel hier invoegen.
+![Model states for Filament - State Group](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-group.png "State Group")
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateGroup;
