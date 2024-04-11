@@ -666,7 +666,9 @@ The `StateTableAction` component will let you transition a state to another vali
 show a confirmation dialogue, while advanced state transitions display an additional form before the transition can be
 done.
 
-TODO: afbeelding van state action met invoervelden.
+![Model states for Filament - State Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action.png "State Action")
+
+![Model states for Filament - State Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action-with-form.png "State Action With Form")
 
 ```php
 use App\States\Failed;
