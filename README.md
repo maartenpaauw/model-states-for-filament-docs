@@ -685,7 +685,7 @@ used (e.g. `closeModalByClickingAway()`).
 The `StateTabs` component can be used to filter records using tabs. Besides the state tabs, there will also be an "All"
 tab to list all records. The state tabs are alphabetically ordered.
 
-TODO: afbeelding van de state tabs.
+![Model states for Filament - State Tabs](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-tabs.png "State Tabs")
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateTabs;
