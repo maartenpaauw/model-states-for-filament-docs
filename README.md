@@ -1,7 +1,7 @@
 # Model states for Filament
 
 <p class="filament-hidden">
-  <img src="https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/banner.jpg" alt="Pennant for Filament">
+  <img src="https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-banner.jpg" alt="Pennant for Filament">
 </p>
 
 ## Introduction
@@ -38,7 +38,7 @@ stateDiagram-v2
     Canceled --> [*]
 ```
 
-TODO: Video
+[![Model states for Filament - Demo Video](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-demo-video.png "Demo Video")](https://www.youtube.com/watch?v=yy6AcehrVYI)
 
 ## Features
 
