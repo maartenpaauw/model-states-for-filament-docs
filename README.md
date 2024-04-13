@@ -481,6 +481,8 @@ The `StateColumn` will display the related model state within a table.
 
 ![Model states for Filament - State Column](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-column.png "State Column")
 
+_State column with color and icon._
+
 ```php
 use Maartenpaauw\Filament\ModelStates\StateColumn;
 
@@ -505,6 +507,8 @@ be used (e.g. `badge()`).
 The `StateEntry` will display the related model state within an infolist.
 
 ![Model states for Filament - State Entry](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-entry.png "State Entry")
+
+_State entry with color and icon._
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateEntry;
@@ -538,6 +542,8 @@ fields.
 
 ![Model states for Filament - State Select](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select.png "State Select")
 
+_State select with disabled invalid transitions._
+
 ```php
 use Maartenpaauw\Filament\ModelStates\StateSelect;
 
@@ -570,6 +576,8 @@ which does not require additional form fields.
 
 ![Model states for Filament - State Toggle Buttons](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-toggle-buttons.png "State Toggle Buttons")
 
+_State toggle buttons with disabled invalid transitions._
+
 ```php
 use Maartenpaauw\Filament\ModelStates\StateToggleButtons;
 
@@ -596,7 +604,11 @@ confirmation dialogue, while advanced state transitions display an additional fo
 
 ![Model states for Filament - State Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action.png "State Action")
 
+_Simple state transition action._
+
 ![Model states for Filament - State Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action-with-form.png "State Action With Form")
+
+_Advanced state transition action with additional form._
 
 ```php
 use App\States\Failed;
@@ -628,7 +640,11 @@ done.
 
 ![Model states for Filament - State Table Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action.png "State Table Action")
 
+_Simple state table transition action._
+
 ![Model states for Filament - State Table Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action-with-form.png "State Table Action With Form")
+
+_Advanced state table transition action with additional form._
 
 ```php
 use App\States\Failed;
@@ -658,6 +674,8 @@ The `StateSelectFilter` component will filter table records by the selected stat
 
 ![Model states for Filament - State Select Filter](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select-filter.png "State Select Filter")
 
+_State select filter will all states listed._
+
 ```php
 use Maartenpaauw\Filament\ModelStates\StateSelectFilter;
 
@@ -667,11 +685,11 @@ StateSelectFilter::make('state')
     ->multiple();
 ```
 
-When using the `StateSelectFilter` component, this plug-in will automatically list all states using their generated class name
-label. If you want to have a custom label, you can implement the `HasLabel` interface.
+When using the `StateSelectFilter` component, this plug-in will automatically list all states using their generated
+class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
 
-Because the `StateSelectFilter` is based on the `SelectFilter` component, all the familiar `SelectFilter` modifiers can be used (
-e.g. `multiple()`).
+Because the `StateSelectFilter` is based on the `SelectFilter` component, all the familiar `SelectFilter` modifiers can
+be used (e.g. `multiple()`).
 
 > [!TIP]
 > More information about select filters can be found on the official
@@ -682,6 +700,8 @@ e.g. `multiple()`).
 The `StateGroup` will add the functionality to group table records based on their status.
 
 ![Model states for Filament - State Group](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-group.png "State Group")
+
+_State group with label._
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateGroup;
@@ -708,6 +728,8 @@ The `StateTabs` component can be used to filter records using tabs. Besides the 
 tab to list all records. The state tabs are alphabetically ordered.
 
 ![Model states for Filament - State Tabs](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-tabs.png "State Tabs")
+
+_State tabs with icon._
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateTabs;
@@ -744,6 +766,8 @@ public function getTabs(): array
 The `StateExportColumn` will add a column to Excel or CSV export will the related model state as value.
 
 TODO: afbeelding van een CSV-export met state hier.
+
+_State label in cell._
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateExportColumn;
