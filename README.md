@@ -6,7 +6,7 @@
 
 ## Introduction
 
-The Model States for Filament plugin is a powerful tool that seamlessly integrates model states and transitions into
+The Model States for Filament plug-in is a powerful tool that seamlessly integrates model states and transitions into
 the [Filament](https://filamentphp.com) UI. It
 supports [Spatie Laravel Model States](https://spatie.be/docs/laravel-model-states/v2/01-introduction) out-of-the-box,
 which makes transitioning, listing, and filtering states effortless tasks.
@@ -14,12 +14,12 @@ which makes transitioning, listing, and filtering states effortless tasks.
 ## Example
 
 Consider a scenario where you're managing an e-commerce platform with various order states
-like `new`, `processing`, `shipped`, `delivered`, and `canceled`. With this plugin, you can effortlessly list all
+like `new`, `processing`, `shipped`, `delivered`, and `canceled`. With this plug-in, you can effortlessly list all
 products based on their states, apply filters to quickly locate specific orders in each state, and seamlessly transition
 between states directly within Filament's intuitive interface. For instance, you can move an order from `processing`
 to `shipped` with just a few clicks, streamlining your workflow and enhancing productivity.
 
-**This plugin leverages the robust capabilities of Filament PHP and the support of Spatie Laravel Model States
+**This plug-in leverages the robust capabilities of Filament PHP and the support of Spatie Laravel Model States
 out-of-the-box, providing a seamless solution for managing model states and transitions with efficiency and ease.**
 
 ### Demo video
@@ -58,7 +58,7 @@ Model States for Filament comes packed with a range of features to enhance your 
 
 **Thank you for choosing Model states for Filament!**
 
-Here's a comprehensive guide to installing and utilizing this plugin. If you encounter any issues, have questions, need
+Here's a comprehensive guide to installing and utilizing this plug-in. If you encounter any issues, have questions, need
 support, or want to request a feature, please feel free to contact me
 at [maartenpaauw@gmail.com](mailto:maartenpaauw@gmail.com).
 
