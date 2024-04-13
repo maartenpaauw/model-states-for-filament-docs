@@ -543,7 +543,8 @@ use Maartenpaauw\Filament\ModelStates\StateSelect;
 
 // ...
 
-StateSelect::make('state');
+StateSelect::make('state')
+    ->native(false);
 ```
 
 When using the `StateSelect` component, this plug-in will automatically list all states using their generated class name
