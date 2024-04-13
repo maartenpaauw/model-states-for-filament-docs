@@ -575,7 +575,8 @@ use Maartenpaauw\Filament\ModelStates\StateToggleButtons;
 
 // ...
 
-StateToggleButtons::make('state');
+StateToggleButtons::make('state')
+    ->inline();
 ```
 
 When using the `StateToggleButtons` component, this plug-in will automatically list all states using their generated
