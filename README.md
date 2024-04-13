@@ -765,7 +765,7 @@ public function getTabs(): array
 
 The `StateExportColumn` will add a column to Excel or CSV export will the related model state as value.
 
-TODO: afbeelding van een CSV-export met state hier.
+![Model states for Filament - State Export Column](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-export-column.png "State Export Column")
 
 _State label in cell._
 
