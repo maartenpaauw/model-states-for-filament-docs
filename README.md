@@ -525,87 +525,6 @@ used (e.g. `badge()`).
 > More information about entries can be found on the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/infolists/entries/getting-started).
 
-### State Action
-
-The `StateAction` component will let you transition a state to another valid state. Basic transitions will only show a
-confirmation dialogue, while advanced state transitions display an additional form before the transition can be done.
-
-![Model states for Filament - State Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action.png "State Action")
-
-![Model states for Filament - State Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action-with-form.png "State Action With Form")
-
-```php
-use App\States\Failed;
-use Maartenpaauw\Filament\ModelStates\StateAction;
-
-// ...
-
-StateAction::make('fail')
-    ->transitionTo(Failed::class);
-```
-
-When using the `StateAction` component, this plug-in will automatically generate a label for the transition. By
-default, "Transition to" followed by the name of the destination state is used as the transition label. If you
-want to have a custom label, you can publish the language files and change the `transition_to_state` translation or, you
-can implement the `HasLabel` interface.
-
-Because the `StateAction` component is based on the `Action` component, all the familiar `Action` modifiers can be
-used (e.g. `closeModalByClickingAway()`).
-
-> [!TIP]
-> More information about actions can be found on the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
-
-### State Export Column
-
-The `StateExportColumn` will add a column to Excel or CSV export will the related model state as value.
-
-TODO: afbeelding van een CSV-export met state hier.
-
-```php
-use Maartenpaauw\Filament\ModelStates\StateExportColumn;
-
-// ...
-
-StateExportColumn::make('state')
-    ->label('State');
-```
-
-When using the `StateExportColumn` component, this plug-in will automatically generate a label for the current state. If
-you want to have a custom label, you can implement the `HasLabel` interface.
-
-Because the `StateExportColumn` component is based on the `ExportColumn` component, all the familiar `ExportColumn`
-modifiers can be used (e.g. `label()`).
-
-> [!TIP]
-> More information about exports can be found on the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/export).
-
-### State Group
-
-The `StateGroup` will add the functionality to group table records based on their status.
-
-![Model states for Filament - State Group](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-group.png "State Group")
-
-```php
-use Maartenpaauw\Filament\ModelStates\StateGroup;
-
-// ...
-
-StateGroup::make('state')
-    ->label('State');
-```
-
-When using the `StateGroup` component, this plug-in will automatically generate a label for the current state. If
-you want to have a custom label, you can implement the `HasLabel` interface.
-
-Because the `StateGroup` component is based on the `Group` component, all the familiar `Group`
-modifiers can be used (e.g. `label()`).
-
-> [!TIP]
-> More information about groups can be found on the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/grouping).
-
 ### State Select
 
 > [!CAUTION]
@@ -637,30 +556,67 @@ e.g. `native()`).
 > More information about selects can be found on the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/select).
 
-### State Select Filter
+### State Toggle Buttons
 
-The `StateSelectFilter` component will filter table records by the selected state.
+> [!CAUTION]
+> Using a state toggle button in combination with the Spatie integration, states aren't transitioned using
+> the `Transition` classes and are directly saved to the database like regular fields. Only use this toggle button when
+> you are sure you are not relying on `Transition` classes and `StateChanged` events.
 
-![Model states for Filament - State Select Filter](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select-filter.png "State Select Filter")
+Like the `StateSelect`, the `StateToggleButtons` is a form component which makes it possible to select valid state
+transitions, all other invalid state transitions are disabled. This component is meant for basic state transitions,
+which does not require additional form fields.
+
+![Model states for Filament - State Toggle Buttons](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-toggle-buttons.png "State Toggle Buttons")
 
 ```php
-use Maartenpaauw\Filament\ModelStates\StateSelectFilter;
+use Maartenpaauw\Filament\ModelStates\StateToggleButtons;
 
 // ...
 
-StateSelectFilter::make('state')
-    ->multiple();
+StateToggleButtons::make('state');
 ```
 
-When using the `StateSelectFilter` component, this plug-in will automatically list all states using their generated class name
-label. If you want to have a custom label, you can implement the `HasLabel` interface.
+When using the `StateToggleButtons` component, this plug-in will automatically list all states using their generated
+class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
 
-Because the `StateSelectFilter` is based on the `SelectFilter` component, all the familiar `SelectFilter` modifiers can be used (
-e.g. `multiple()`).
+Because the `StateToggleButtons` is based on the `ToggleButtons` component, all the familiar `ToggleButtons` modifiers
+can be used (e.g. `inline()`).
 
 > [!TIP]
-> More information about select filters can be found on the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/select).
+> More information about toggle buttons can be found on the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/toggle-buttons).
+
+### State Action
+
+The `StateAction` component will let you transition a state to another valid state. Basic transitions will only show a
+confirmation dialogue, while advanced state transitions display an additional form before the transition can be done.
+
+![Model states for Filament - State Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action.png "State Action")
+
+![Model states for Filament - State Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action-with-form.png "State Action With Form")
+
+```php
+use App\States\Failed;
+use Maartenpaauw\Filament\ModelStates\StateAction;
+
+// ...
+
+StateAction::make('fail')
+    ->transitionTo(Failed::class);
+```
+
+When using the `StateAction` component, this plug-in will automatically generate a label for the transition. By
+default, "Transition to" followed by the name of the destination state is used as the transition label. If you
+want to have a custom label, you can publish the language files and change the `transition_to_state` translation or, you
+can implement the `HasLabel` interface.
+
+Because the `StateAction` component is based on the `Action` component, all the familiar `Action` modifiers can be
+used (e.g. `closeModalByClickingAway()`).
+
+> [!TIP]
+> More information about actions can be found on the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
 
 ### State Table Action
 
@@ -693,6 +649,56 @@ used (e.g. `closeModalByClickingAway()`).
 > [!TIP]
 > More information about table actions can be found on the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions).
+
+### State Select Filter
+
+The `StateSelectFilter` component will filter table records by the selected state.
+
+![Model states for Filament - State Select Filter](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select-filter.png "State Select Filter")
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateSelectFilter;
+
+// ...
+
+StateSelectFilter::make('state')
+    ->multiple();
+```
+
+When using the `StateSelectFilter` component, this plug-in will automatically list all states using their generated class name
+label. If you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateSelectFilter` is based on the `SelectFilter` component, all the familiar `SelectFilter` modifiers can be used (
+e.g. `multiple()`).
+
+> [!TIP]
+> More information about select filters can be found on the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/select).
+
+### State Group
+
+The `StateGroup` will add the functionality to group table records based on their status.
+
+![Model states for Filament - State Group](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-group.png "State Group")
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateGroup;
+
+// ...
+
+StateGroup::make('state')
+    ->label('State');
+```
+
+When using the `StateGroup` component, this plug-in will automatically generate a label for the current state. If
+you want to have a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateGroup` component is based on the `Group` component, all the familiar `Group`
+modifiers can be used (e.g. `label()`).
+
+> [!TIP]
+> More information about groups can be found on the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/grouping).
 
 ### State Tabs
 
@@ -731,36 +737,30 @@ public function getTabs(): array
 > More information about state tabs can be found on the official Filament
 > [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
 
-### State Toggle Buttons
+### State Export Column
 
-> [!CAUTION]
-> Using a state toggle button in combination with the Spatie integration, states aren't transitioned using
-> the `Transition` classes and are directly saved to the database like regular fields. Only use this toggle button when
-> you are sure you are not relying on `Transition` classes and `StateChanged` events.
+The `StateExportColumn` will add a column to Excel or CSV export will the related model state as value.
 
-Like the `StateSelect`, the `StateToggleButtons` is a form component which makes it possible to select valid state
-transitions, all other invalid state transitions are disabled. This component is meant for basic state transitions,
-which does not require additional form fields.
-
-![Model states for Filament - State Toggle Buttons](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-toggle-buttons.png "State Toggle Buttons")
+TODO: afbeelding van een CSV-export met state hier.
 
 ```php
-use Maartenpaauw\Filament\ModelStates\StateToggleButtons;
+use Maartenpaauw\Filament\ModelStates\StateExportColumn;
 
 // ...
 
-StateToggleButtons::make('state');
+StateExportColumn::make('state')
+    ->label('State');
 ```
 
-When using the `StateToggleButtons` component, this plug-in will automatically list all states using their generated
-class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
+When using the `StateExportColumn` component, this plug-in will automatically generate a label for the current state. If
+you want to have a custom label, you can implement the `HasLabel` interface.
 
-Because the `StateToggleButtons` is based on the `ToggleButtons` component, all the familiar `ToggleButtons` modifiers
-can be used (e.g. `inline()`).
+Because the `StateExportColumn` component is based on the `ExportColumn` component, all the familiar `ExportColumn`
+modifiers can be used (e.g. `label()`).
 
 > [!TIP]
-> More information about toggle buttons can be found on the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/toggle-buttons).
+> More information about exports can be found on the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/export).
 
 ## Advanced
 
