@@ -7,19 +7,19 @@
 ## Introduction
 
 The Model States for Filament plugin is a powerful tool that seamlessly integrates model states and transitions into
-the [Filament](https://filamentphp.com) UI. It supports
-[Spatie Laravel model states](https://spatie.be/docs/laravel-model-states/v2/01-introduction) out-of-the-box, which
-makes transitioning, listing, and filtering states effortless tasks.
+the [Filament](https://filamentphp.com) UI. It
+supports [Spatie Laravel Model States](https://spatie.be/docs/laravel-model-states/v2/01-introduction) out-of-the-box,
+which makes transitioning, listing, and filtering states effortless tasks.
 
 ## Example
 
-Consider a scenario where you're managing an e-commerce platform with various order states like `new`, `processing`,
-`shipped`, `delivered` and `canceled`. With this plug-in, you can effortlessly list all products based on their states,
-apply filters to quickly locate specific orders in each state, and seamlessly transition between states directly
-within Filament's intuitive interface. For instance, you can move an order from `processing` to `shipped` with just a
-few clicks, streamlining your workflow and enhancing productivity.
+Consider a scenario where you're managing an e-commerce platform with various order states
+like `new`, `processing`, `shipped`, `delivered`, and `canceled`. With this plugin, you can effortlessly list all
+products based on their states, apply filters to quickly locate specific orders in each state, and seamlessly transition
+between states directly within Filament's intuitive interface. For instance, you can move an order from `processing`
+to `shipped` with just a few clicks, streamlining your workflow and enhancing productivity.
 
-**This plugin leverages the robust capabilities of Filament PHP and support of Spatie Laravel model state
+**This plugin leverages the robust capabilities of Filament PHP and the support of Spatie Laravel Model States
 out-of-the-box, providing a seamless solution for managing model states and transitions with efficiency and ease.**
 
 ### Demo video
@@ -43,15 +43,15 @@ stateDiagram-v2
 
 ## Features
 
-Model states for Filament comes packed with a range of features to enhance your experience:
+Model States for Filament comes packed with a range of features to enhance your experience:
 
 - Listing states within tables and exports.
 - Filtering records by states.
 - Grouping records by states.
-- Transition to valid states using select or toggle buttons components.
-- Transition to valid states using page and table actions.
-- [Spatie Laravel model states](https://spatie.be/docs/laravel-model-states/v2/01-introduction) package support
-  out-of-the-box.
+- Transitioning to valid states using select or toggle button components.
+- Transitioning to valid states using page and table actions.
+- Out-of-the-box support for
+  the [Spatie Laravel Model States](https://spatie.be/docs/laravel-model-states/v2/01-introduction) package.
 - Compatible with dark mode.
 
 ## Installation
@@ -144,24 +144,25 @@ Instead, you can set the credentials on the `Composer Package Authentication` sc
 
 ## Setup
 
-In this paragraph we list the steps you need to follow to get up and running with the out-of-the-box supported Spatie
+In this paragraph, we list the steps you need to follow to get up and running with the out-of-the-box supported Spatie
 integration.
 
 ### Spatie
 
-The Model states for Filament comes with support for Spatie Laravel model states out-of-the-box.
+Make sure you have configured at least one Spatie Laravel model state. For more information, refer to the official
+Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/01-introduction).
 
 #### State Preparation
 
 > [!TIP]
-> More information about state configuration can be found on the official
+> More information about state configuration can be found in the official
 > Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states).
 
-When using Spatie Laravel model states, there are multiple abstract state classes. These abstract state classes need
-some modifications. We have to implement the `FilamentSpatieState` interface and use the `ProvidesSpatieStateToFilament`
-trait.
+When utilizing Spatie Laravel Model States, you'll have several abstract state classes. These abstract classes
+require certain modifications. To properly integrate them, it's necessary to implement the `FilamentSpatieState`
+interface and utilize the `ProvidesSpatieStateToFilament` trait.
 
-Here is an example `PaymentState` abstract class with the modification in place.
+Here's an example of the `PaymentState` abstract class with the necessary modifications already applied.
 
 ```php
 <?php
@@ -193,14 +194,14 @@ abstract class PaymentState extends State implements FilamentSpatieState
 #### Transition Preparation
 
 > [!TIP]
-> More information about transition configuration can be found on the official Spatie
+> For more information about transition configuration, refer to the official Spatie
 > [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
 
-Spatie Laravel model states offers support for custom transition classes. All custom transition classes must implement
+Spatie Laravel model states offer support for custom transition classes. All custom transition classes must implement
 the `FilamentSpatieTransition` interface and use the `ProvidesSpatieTransitionToFilament` trait before they can be used
 within Filament.
 
-Here is an example `PendingToFailed` transition class with the modification is place.
+Here is an example of the `PendingToFailed` transition class with the necessary modifications in place.
 
 ```php
 <?php
@@ -237,12 +238,12 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 
 ##### Additional Transition Data
 
-Most of the time we need additional data before we can transition to a new state. With the `PendingToFailed` transition
-in mind, it would be nice to store an error message explaining why the state was transitioned to failed. By adding
-a `form` method to the transition class, there will be a form displayed when starting the transition.
+Most of the time, additional data is needed before transitioning to a new state. Considering the `PendingToFailed`
+transition, it would be beneficial to store an error message explaining why the state transitioned to failed. By adding
+a `form` method to the transition class, a form will be displayed when initiating the transition.
 
 Here is an example `PendingToFailed` transition class with the form is place. This transition will display a message
-textarea when the `StateAction` button is clicked.
+textarea when the `StateAction` or `StateTableAction` button is clicked.
 
 ```php
 <?php
@@ -292,14 +293,15 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 ```
 
 > [!WARNING]
-> Because the plug-in needs to create transition instances to determine if there is a `form`, all constructor properties
-> need a default value.
+> Since the plug-in needs to create transition instances to determine if there is a `form`, all constructor properties
+> must have a default value.
 
-By default, this plug-in will map the form component names to their constructor property names. With the
-previous `PendingToFailed` in mind, the `message` textarea input will end up in constructor property `$message`. If you
-wish to do any modifications before creating the transition instance, you can overwrite the static method `fill`.
+By default, this plug-in will map the form component names to their constructor property names. Considering the
+previous `PendingToFailed` transition, the `message` textarea input will correspond to the constructor
+property `$message`. If you want to make any modifications before creating the transition instance, you can override the
+static method `fill`.
 
-For example prefixing the `message`:
+For example, you can prefix the `message`:
 
 ```php
 <?php
@@ -359,11 +361,11 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 
 #### Optional Label, Color and Icon
 
-By default, the name of the state class is used as a label (example `FailedState` will have the label `Failed`), it has
-no color and no icon. If you want a different label, color or an icon; you have to implement the `HasLabel`, `HasColor`
-or `HasIcon` interface.
+By default, the name of the state class is used as a label (for example, `FailedState` will have the label `Failed`),
+without any assigned color or icon. If you desire a different label, color, or icon, you must implement
+the `HasLabel`, `HasColor`, or `HasIcon` interface.
 
-Here is an example `Failed` state with `HasLabel`, `HasColor` and `HasIcon` implemented.
+Here is an example of the `Failed` state with `HasLabel`, `HasColor`, and `HasIcon` implemented.
 
 ```php
 <?php
@@ -468,7 +470,7 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 
 ## Usage
 
-In this paragraph all available components and their features are listed.
+In this paragraph, all available components and their features are listed.
 
 ### State Column
 
@@ -487,14 +489,14 @@ StateColumn::make('state')
     ->badge();
 ```
 
-When using the `StateColumn` component, this plug-in will automatically generate a label for the current state. If you
-want to have a custom label, you can implement the `HasLabel` interface.
+When utilizing the `StateColumn` component, this plug-in will automatically generate a label for the current state. If
+you desire a custom label, you can implement the `HasLabel` interface.
 
 Because the `StateColumn` component is based on the `TextColumn` component, all the familiar `TextColumn` modifiers can
-be used (e.g. `badge()`).
+be used (e.g., `badge()`).
 
 > [!TIP]
-> More information about columns can be found on the official
+> For more information about columns, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/columns/getting-started).
 
 ### State Entry
@@ -514,26 +516,25 @@ StateEntry::make('state')
     ->badge();
 ```
 
-When using the `StateEntry` component, this plug-in will automatically generate a label for the current state. If you
-want to have a custom label, you can implement the `HasLabel` interface.
+When utilizing the `StateEntry` component, this plug-in will automatically generate a label for the current state. If
+you desire a custom label, you can implement the `HasLabel` interface.
 
 Because the `StateEntry` component is based on the `TextEntry` component, all the familiar `TextEntry` modifiers can be
-used (e.g. `badge()`).
+used (e.g., `badge()`).
 
 > [!TIP]
-> More information about entries can be found on the official
+> For more information about entries, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/infolists/entries/getting-started).
 
 ### State Select
 
 > [!CAUTION]
-> Using a state select in combination with the Spatie integration, states aren't transitioned using the `Transition`
-> classes and are directly saved to the database like regular fields. Only use this select when you are sure you are not
-> relying on `Transition` classes and `StateChanged` events.
+> When using a state select in combination with the Spatie integration, states aren't transitioned using
+> the `Transition` classes and are directly saved to the database like regular fields. Only use this select when you are
+> sure you are not relying on `Transition` classes and `StateChanged` events.
 
-The `StateSelect` is a form component which makes it possible to select valid state transitions, all other invalid state
-transitions are disabled. This component is meant for basic state transitions, which does not require additional form
-fields.
+The `StateSelect` is a form component that enables selecting valid state transitions, disabling all other invalid state
+transitions. This component is intended for basic state transitions that do not require additional form fields.
 
 ![Model states for Filament - State Select](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select.png "State Select")
 
@@ -548,26 +549,26 @@ StateSelect::make('state')
     ->native(false);
 ```
 
-When using the `StateSelect` component, this plug-in will automatically list all states using their generated class name
-label. If you want to have a custom label, you can implement the `HasLabel` interface.
+When utilizing the `StateSelect` component, this plug-in will automatically list all states using their generated class
+name label. If you desire a custom label, you can implement the `HasLabel` interface.
 
 Because the `StateSelect` is based on the `Select` component, all the familiar `Select` modifiers can be used (
-e.g. `native()`).
+e.g., `native()`).
 
 > [!TIP]
-> More information about selects can be found on the official
+> For more information about selects, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/select).
 
 ### State Toggle Buttons
 
 > [!CAUTION]
-> Using a state toggle button in combination with the Spatie integration, states aren't transitioned using
+> When using a state toggle button in combination with the Spatie integration, states aren't transitioned using
 > the `Transition` classes and are directly saved to the database like regular fields. Only use this toggle button when
 > you are sure you are not relying on `Transition` classes and `StateChanged` events.
 
-Like the `StateSelect`, the `StateToggleButtons` is a form component which makes it possible to select valid state
-transitions, all other invalid state transitions are disabled. This component is meant for basic state transitions,
-which does not require additional form fields.
+Similar to the `StateSelect`, the `StateToggleButtons` is a form component that enables selecting valid state
+transitions, disabling all other invalid state transitions. This component is intended for basic state transitions that
+do not require additional form fields.
 
 ![Model states for Filament - State Toggle Buttons](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-toggle-buttons.png "State Toggle Buttons")
 
@@ -582,20 +583,21 @@ StateToggleButtons::make('state')
     ->inline();
 ```
 
-When using the `StateToggleButtons` component, this plug-in will automatically list all states using their generated
-class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
+When utilizing the `StateToggleButtons` component, this plug-in will automatically list all states using their generated
+class name label. If you desire a custom label, you can implement the `HasLabel` interface.
 
 Because the `StateToggleButtons` is based on the `ToggleButtons` component, all the familiar `ToggleButtons` modifiers
-can be used (e.g. `inline()`).
+can be used (e.g., `inline()`).
 
 > [!TIP]
-> More information about toggle buttons can be found on the official
+> For more information about toggle buttons, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/toggle-buttons).
 
 ### State Action
 
-The `StateAction` component will let you transition a state to another valid state. Basic transitions will only show a
-confirmation dialogue, while advanced state transitions display an additional form before the transition can be done.
+The `StateAction` component allows you to transition a state to another valid state. Basic transitions will only show a
+confirmation dialogue, while advanced state transitions display an additional form before the transition can be
+performed.
 
 ![Model states for Filament - State Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action.png "State Action")
 
@@ -615,23 +617,23 @@ StateAction::make('fail')
     ->transitionTo(Failed::class);
 ```
 
-When using the `StateAction` component, this plug-in will automatically generate a label for the transition. By
-default, "Transition to" followed by the name of the destination state is used as the transition label. If you
-want to have a custom label, you can publish the language files and change the `transition_to_state` translation or, you
-can implement the `HasLabel` interface.
+When utilizing the `StateAction` component, this plug-in will automatically generate a label for the transition. By
+default, "Transition to" followed by the name of the destination state is used as the transition label. If you desire a
+custom label, you can publish the language files and change the `transition_to_state` translation, or you can implement
+the `HasLabel` interface.
 
 Because the `StateAction` component is based on the `Action` component, all the familiar `Action` modifiers can be
-used (e.g. `closeModalByClickingAway()`).
+used (e.g., `closeModalByClickingAway()`).
 
 > [!TIP]
-> More information about actions can be found on the official
+> For more information about actions, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
 
 ### State Table Action
 
-The `StateTableAction` component will let you transition a state to another valid state. Basic transitions will only
-show a confirmation dialogue, while advanced state transitions display an additional form before the transition can be
-done.
+The `StateTableAction` component enables transitioning a state to another valid state. Basic transitions will only
+display a confirmation dialogue, while advanced state transitions will show an additional form before the transition can
+be completed.
 
 ![Model states for Filament - State Table Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action.png "State Table Action")
 
@@ -651,21 +653,21 @@ StateTableAction::make('fail')
     ->transitionTo(Failed::class);
 ```
 
-When using the `StateTableAction` component, this plug-in will automatically generate a label for the transition. By
-default, "Transition to" followed by the name of the destination state is used as the transition label. If you
-want to have a custom label, you can publish the language files and change the `transition_to_state` translation or, you
-can implement the `HasLabel` interface.
+When utilizing the `StateTableAction` component, this plug-in will automatically generate a label for the transition. By
+default, "Transition to" followed by the name of the destination state is used as the transition label. If you desire a
+custom label, you can publish the language files and change the `transition_to_state` translation, or you can implement
+the `HasLabel` interface.
 
 Because the `StateTableAction` component is based on the `Action` component, all the familiar `Action` modifiers can be
-used (e.g. `closeModalByClickingAway()`).
+used (e.g., `closeModalByClickingAway()`).
 
 > [!TIP]
-> More information about table actions can be found on the official
+> For more information about table actions, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions).
 
 ### State Select Filter
 
-The `StateSelectFilter` component will filter table records by the selected state.
+The `StateSelectFilter` component filters table records by the selected state.
 
 ![Model states for Filament - State Select Filter](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select-filter.png "State Select Filter")
 
@@ -680,19 +682,19 @@ StateSelectFilter::make('state')
     ->multiple();
 ```
 
-When using the `StateSelectFilter` component, this plug-in will automatically list all states using their generated
-class name label. If you want to have a custom label, you can implement the `HasLabel` interface.
+When utilizing the `StateSelectFilter` component, this plug-in will automatically list all states using their generated
+class name label. If you desire a custom label, you can implement the `HasLabel` interface.
 
 Because the `StateSelectFilter` is based on the `SelectFilter` component, all the familiar `SelectFilter` modifiers can
-be used (e.g. `multiple()`).
+be used (e.g., `multiple()`).
 
 > [!TIP]
-> More information about select filters can be found on the official
+> For more information about select filters, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/select).
 
 ### State Group
 
-The `StateGroup` will add the functionality to group table records based on their status.
+The `StateGroup` adds functionality to group table records based on their status.
 
 ![Model states for Filament - State Group](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-group.png "State Group")
 
@@ -707,11 +709,11 @@ StateGroup::make('state')
     ->label('State');
 ```
 
-When using the `StateGroup` component, this plug-in will automatically generate a label for the current state. If
-you want to have a custom label, you can implement the `HasLabel` interface.
+When utilizing the `StateGroup` component, this plug-in will automatically generate a label for the current state. If
+you desire a custom label, you can implement the `HasLabel` interface.
 
-Because the `StateGroup` component is based on the `Group` component, all the familiar `Group`
-modifiers can be used (e.g. `label()`).
+Because the `StateGroup` component is based on the `Group` component, all the familiar `Group` modifiers can be used (
+e.g., `label()`).
 
 > [!TIP]
 > More information about groups can be found on the official
@@ -719,8 +721,8 @@ modifiers can be used (e.g. `label()`).
 
 ### State Tabs
 
-The `StateTabs` component can be used to filter records using tabs. Besides the state tabs, there will also be an "All"
-tab to list all records. The state tabs are alphabetically ordered.
+The `StateTabs` component can be used to filter records using tabs. In addition to the state tabs, there will also be
+an "All" tab to list all records. The state tabs are alphabetically ordered.
 
 ![Model states for Filament - State Tabs](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-tabs.png "State Tabs")
 
@@ -737,7 +739,7 @@ public function getTabs(): array
 }
 ```
 
-If you wish to not include the "All" tab mentioned above, you can chain the `includeAllTab(false)` method.
+If you prefer not to include the "All" tab mentioned above, you can chain the `includeAllTab(false)` method.
 
 ```php
 use Maartenpaauw\Filament\ModelStates\StateTabs;
@@ -753,12 +755,13 @@ public function getTabs(): array
 ```
 
 > [!TIP]
-> More information about state tabs can be found on the official Filament
-> [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
+> For more information about state tabs, refer to the official
+>
+Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
 
 ### State Export Column
 
-The `StateExportColumn` will add a column to Excel or CSV export will the related model state as value.
+The `StateExportColumn` will add a column to Excel or CSV export with the related model state as the value.
 
 ![Model states for Filament - State Export Column](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-export-column.png "State Export Column")
 
@@ -773,22 +776,22 @@ StateExportColumn::make('state')
     ->label('State');
 ```
 
-When using the `StateExportColumn` component, this plug-in will automatically generate a label for the current state. If
-you want to have a custom label, you can implement the `HasLabel` interface.
+When utilizing the `StateExportColumn` component, this plug-in will automatically generate a label for the current
+state. If you desire a custom label, you can implement the `HasLabel` interface.
 
 Because the `StateExportColumn` component is based on the `ExportColumn` component, all the familiar `ExportColumn`
-modifiers can be used (e.g. `label()`).
+modifiers can be used (e.g., `label()`).
 
 > [!TIP]
-> More information about exports can be found on the official
+> For more information about exports, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/export).
 
 ## Advanced
 
 ### Custom State Manager
 
-Do you want to use a different model state manager than Spatie Laravel model state? This is totally possible. You have
-to create your own manager by creating a new class that implements the `Manager` interface.
+Would you like to use an alternative model state manager instead of Spatie Laravel model state? You can certainly do so.
+Simply create your own manager by creating a class that implements to the `Manager` interface.
 
 ```php
 <?php
@@ -830,8 +833,8 @@ interface Manager
 }
 ```
 
-After creating a custom manager, you can specify per component which manager to use. For example when using the state
-action, you can chain the `->manager(...)` method after making the `StateAction`.
+After creating a custom manager, you can specify which manager to use per component. For example, when using the state
+action, you can chain the `->manager(CustomManager::class)` method after creating the `StateAction`.
 
 ```php
 use App\States\CustomManager;
