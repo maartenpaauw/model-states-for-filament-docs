@@ -23,6 +23,8 @@ out-of-the-box, providing a seamless solution for managing model states and tran
 
 ### Demo video
 
+[![Model states for Filament - Demo Video](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-demo-video.png "Demo Video")](https://www.youtube.com/watch?v=yy6AcehrVYI)
+
 Check out this video demonstrating how straightforward it is to transition from one valid state to another using
 Filament, with the following transitions in mind:
 
@@ -37,8 +39,6 @@ stateDiagram-v2
     Delivered --> [*]
     Canceled --> [*]
 ```
-
-[![Model states for Filament - Demo Video](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-demo-video.png "Demo Video")](https://www.youtube.com/watch?v=yy6AcehrVYI)
 
 ## Features
 
