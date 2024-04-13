@@ -7,8 +7,9 @@
 ## Introduction
 
 The Model States for Filament plugin is a powerful tool that seamlessly integrates model states and transitions into
-the [Filament](https://filamentphp.com) UI. It supports Spatie Laravel model states, making transitioning, listing, and
-filtering states effortless tasks.
+the [Filament](https://filamentphp.com) UI. It supports
+[Spatie Laravel model states](https://spatie.be/docs/laravel-model-states/v2/01-introduction) out-of-the-box, which
+makes transitioning, listing, and filtering states effortless tasks.
 
 ## Example
 
