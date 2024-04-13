@@ -53,12 +53,6 @@ Model states for Filament comes packed with a range of features to enhance your 
   out-of-the-box.
 - Compatible with dark mode.
 
-## Screenshots
-
-Take a glimpse of Model states for Filament in action:
-
-TODO: Screenshot + onderschrift.
-
 ## Installation
 
 **Thank you for choosing Model states for Filament!**
