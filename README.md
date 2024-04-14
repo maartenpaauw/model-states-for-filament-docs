@@ -162,31 +162,34 @@ When utilizing Spatie Laravel Model States, you'll have several abstract state c
 require certain modifications. To properly integrate them, it's necessary to implement the `FilamentSpatieState`
 interface and utilize the `ProvidesSpatieStateToFilament` trait.
 
-Here's an example of the `PaymentState` abstract class with the necessary modifications already applied.
+Here's an example of the `OrderState` abstract class with the necessary modifications already applied.
 
 ```php
 <?php
 
 namespace App\States;
 
+use App\Models\Order;
 use Maartenpaauw\Filament\ModelStates\Concerns\ProvidesSpatieStateToFilament;
 use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieState;
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
 
 /**
- * @extends State<Payment>
+ * @extends State<Order>
  */
-abstract class PaymentState extends State implements FilamentSpatieState
+abstract class OrderState extends State implements FilamentSpatieState
 {
     use ProvidesSpatieStateToFilament;
     
     public static function config(): StateConfig
     {
         return parent::config()
-            ->default(Pending::class)
-            ->allowTransition(Pending::class, Paid::class)
-            ->allowTransition(Pending::class, Failed::class, PendingToFailed::class);
+            ->default(NewState::class)
+            ->allowTransition(NewState::class, ProcessingState::class)
+            ->allowTransition(ProcessingState::class, ShippedState::class)
+            ->allowTransition(ShippedState::class, DeliveredState::class)
+            ->allowTransition([NewState::class, ProcessingState::class], CancelledState::class, ToCancelled::class);
     }
 }
 ```
@@ -201,48 +204,49 @@ Spatie Laravel model states offer support for custom transition classes. All cus
 the `FilamentSpatieTransition` interface and use the `ProvidesSpatieTransitionToFilament` trait before they can be used
 within Filament.
 
-Here is an example of the `PendingToFailed` transition class with the necessary modifications in place.
+Here is an example of the `ToCancelled` transition class with the necessary modifications in place.
 
 ```php
 <?php
 
 namespace App\States;
 
+use App\Models\Order;
 use Maartenpaauw\Filament\ModelStates\Concerns\ProvidesSpatieTransitionToFilament;
 use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieTransition;
 use Spatie\ModelStates\Transition;
 
 /**
- * @implements FilamentSpatieTransition<Payment>
+ * @implements FilamentSpatieTransition<Order>
  */
-final class PendingToFailed extends Transition implements FilamentSpatieTransition
+final class ToCancelled extends Transition implements FilamentSpatieTransition
 {
     use ProvidesSpatieTransitionToFilament;
     
     public function __construct(
-        private readonly Payment $payment,
+        private readonly Order $order,
     ) {
     }
     
-    public function handle(): Payment
+    public function handle(): Order
     {
-        $this->payment->state = new Failed($this->payment);
-        $this->payment->failed_at = now();
+        $this->order->state = new CancelledState($this->order);
+        $this->order->cancelled_at = now();
 
-        $this->payment->save();
+        $this->order->save();
 
-        return $this->payment;
+        return $this->order;
     }
 }
 ```
 
 ##### Additional Transition Data
 
-Most of the time, additional data is needed before transitioning to a new state. Considering the `PendingToFailed`
-transition, it would be beneficial to store an error message explaining why the state transitioned to failed. By adding
+Most of the time, additional data is needed before transitioning to a new state. Considering the `ToCancelled`
+transition, it would be beneficial to store a reason explaining why the state transitioned to cancelled state. By adding
 a `form` method to the transition class, a form will be displayed when initiating the transition.
 
-Here is an example `PendingToFailed` transition class with the form is place. This transition will display a message
+Here is an example `ToCancelled` transition class with the form is place. This transition will display a reason
 textarea when the `StateAction` or `StateTableAction` button is clicked.
 
 ```php
@@ -250,43 +254,44 @@ textarea when the `StateAction` or `StateTableAction` button is clicked.
 
 namespace App\States;
 
+use App\Models\Order;
 use Maartenpaauw\Filament\ModelStates\Concerns\ProvidesSpatieTransitionToFilament;
 use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieTransition;
 use Spatie\ModelStates\Transition;
 
 /**
- * @implements FilamentSpatieTransition<Payment>
+ * @implements FilamentSpatieTransition<Order>
  */
-final class PendingToFailed extends Transition implements FilamentSpatieTransition
+final class ToCancelled extends Transition implements FilamentSpatieTransition
 {
     use ProvidesSpatieTransitionToFilament;
 
     public function __construct(
-        private readonly Payment $payment,
-        private readonly string $message = '',
+        private readonly Order $order,
+        private readonly string $reason = '',
     ) {
     }
 
-    public function handle(): Payment
+    public function handle(): Order
     {
-        $this->payment->state = new Failed($this->payment);
-        $this->payment->failed_at = now();
-        $this->payment->error_message = $this->message;
+        $this->order->state = new CancelledState($this->order);
+        $this->order->cancelled_at = now();
+        $this->order->cancellation_reason = $this->reason;
 
-        $this->payment->save();
+        $this->order->save();
 
-        return $this->payment;
+        return $this->order;
     }
 
     public function form(): array | Closure | null
     {
         return [
-            Textarea::make('message')
+            Textarea::make('reason')
                 ->required()
                 ->minLength(1)
                 ->maxLength(1000)
                 ->rows(5)
-                ->helperText(__('This message will be sent to the customer.')),
+                ->helperText(__('This reason will be sent to the customer.')),
         ];
     }
 }
@@ -297,63 +302,63 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 > must have a default value.
 
 By default, this plug-in will map the form component names to their constructor property names. Considering the
-previous `PendingToFailed` transition, the `message` textarea input will correspond to the constructor
-property `$message`. If you want to make any modifications before creating the transition instance, you can override the
-static method `fill`.
+previous `ToCancelled` transition, the `reason` textarea input will correspond to the constructor property `$reason`. If
+you want to make any modifications before creating the transition instance, you can override the static method `fill`.
 
-For example, you can prefix the `message`:
+For example, you can prefix the `reason`:
 
 ```php
 <?php
 
 namespace App\States;
 
+use App\Models\Order;
 use Illuminate\Support\Arr;
 use Maartenpaauw\Filament\ModelStates\Concerns\ProvidesSpatieTransitionToFilament;
 use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieTransition;
 use Spatie\ModelStates\Transition;
 
 /**
- * @implements FilamentSpatieTransition<Payment>
+ * @implements FilamentSpatieTransition<Order>
  */
-final class PendingToFailed extends Transition implements FilamentSpatieTransition
+final class ToCancelled extends Transition implements FilamentSpatieTransition
 {
     use ProvidesSpatieTransitionToFilament;
 
     public function __construct(
-        private readonly Payment $payment,
-        private readonly string $message = '',
+        private readonly Order $order,
+        private readonly string $reason = '',
     ) {
     }
 
     public static function fill(Model $model, array $formData): SpatieTransition
     {
         return new self(
-            payment: $model,
-            message: 'The transition failed because: ' . Arr::get($formData, 'message'),
+            order: $model,
+            reason: 'The order is cancelled because: ' . Arr::get($formData, 'reason'),
         );
     }
 
-    public function handle(): Payment
+    public function handle(): Order
     {
-        $this->payment->state = new Failed($this->payment);
-        $this->payment->failed_at = now();
-        $this->payment->error_message = $this->message;
+        $this->order->state = new CancelledState($this->order);
+        $this->order->cancelled_at = now();
+        $this->order->cancellation_reason = $this->reason;
 
-        $this->payment->save();
+        $this->order->save();
 
-        return $this->payment;
+        return $this->order;
     }
 
     public function form(): array | Closure | null
     {
         return [
-            Textarea::make('message')
+            Textarea::make('reason')
                 ->required()
                 ->minLength(1)
                 ->maxLength(1000)
                 ->rows(5)
-                ->helperText(__('This message will be sent to the customer.')),
+                ->helperText(__('This reason will be sent to the customer.')),
         ];
     }
 }
@@ -361,11 +366,11 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
 
 #### Optional Label, Color and Icon
 
-By default, the name of the state class is used as a label (for example, `FailedState` will have the label `Failed`),
-without any assigned color or icon. If you desire a different label, color, or icon, you must implement
-the `HasLabel`, `HasColor`, or `HasIcon` interface.
+By default, the name of the state class is used as a label (for example, `CancelledState` will have the
+label `Cancelled`), without any assigned color or icon. If you desire a different label, color, or icon, you must
+implement the `HasLabel`, `HasColor`, or `HasIcon` interface.
 
-Here is an example of the `Failed` state with `HasLabel`, `HasColor`, and `HasIcon` implemented.
+Here is an example of the `Cancelled` state with `HasLabel`, `HasColor`, and `HasIcon` implemented.
 
 ```php
 <?php
@@ -377,11 +382,11 @@ use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
-final class Failed extends PaymentState implements HasLabel, HasColor, HasIcon
+final class CancelledState extends OrderState implements HasLabel, HasColor, HasIcon
 {
     public function getLabel(): string
     {
-        return __('Rejected');
+        return __('Order Cancelled');
     }
 
     public function getColor(): array
@@ -400,13 +405,14 @@ By default, "Transition to" followed by the name of the destination state is use
 it has no color or icon. If you want a different label, or if you want to use a color or icon; you have to implement
 the `HasLabel`, `HasColor` or `HasIcon` interface.
 
-Here is an example `PendingToFailed` transtition with `HasLabel`, `HasColor` and `HasIcon` implemented.
+Here is an example `ToCancelled` transtition with `HasLabel`, `HasColor` and `HasIcon` implemented.
 
 ```php
 <?php
 
 namespace App\States;
 
+use App\Models\Order;
 use Filament\Support\Colors\Color;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
@@ -416,32 +422,32 @@ use Maartenpaauw\Filament\ModelStates\Contracts\FilamentSpatieTransition;
 use Spatie\ModelStates\Transition;
 
 /**
- * @implements FilamentSpatieTransition<Payment>
+ * @implements FilamentSpatieTransition<Order>
  */
-final class PendingToFailed extends Transition implements FilamentSpatieTransition, HasLabel, HasColor, HasIcon
+final class ToCancelled extends Transition implements FilamentSpatieTransition, HasLabel, HasColor, HasIcon
 {
     use ProvidesSpatieTransitionToFilament;
-    
+
     public function __construct(
-        private readonly Payment $payment,
-        private readonly string $message = '',
+        private readonly Order $order,
+        private readonly string $reason = '',
     ) {
     }
-    
-    public function handle(): Payment
+
+    public function handle(): Order
     {
-        $this->payment->state = new Failed($this->payment);
-        $this->payment->failed_at = now();
-        $this->payment->error_message = $this->message;
+        $this->order->state = new CancelledState($this->order);
+        $this->order->cancelled_at = now();
+        $this->order->cancellation_reason = $this->reason;
 
-        $this->payment->save();
+        $this->order->save();
 
-        return $this->payment;
+        return $this->order;
     }
-    
+
     public function getLabel(): string
     {
-        return __('Mark as Failed');
+        return __('Mark as Cancelled');
     }
 
     public function getColor(): array
@@ -453,16 +459,16 @@ final class PendingToFailed extends Transition implements FilamentSpatieTransiti
     {
         return 'heroicon-o-x-circle';
     }
-    
+
     public function form(): array | Closure | null
     {
         return [
-            Textarea::make('message')
+            Textarea::make('reason')
                 ->required()
                 ->minLength(1)
                 ->maxLength(1000)
                 ->rows(5)
-                ->helperText(__('This message will be sent to the customer.')),
+                ->helperText(__('This reason will be sent to the customer.')),
         ];
     }
 }
@@ -608,13 +614,13 @@ _Simple state transition action._
 _Advanced state transition action with additional form._
 
 ```php
-use App\States\Failed;
+use App\States\CancelledState;
 use Maartenpaauw\Filament\ModelStates\StateAction;
 
 // ...
 
-StateAction::make('fail')
-    ->transitionTo(Failed::class);
+StateAction::make('cancel')
+    ->transitionTo(CancelledState::class);
 ```
 
 When utilizing the `StateAction` component, this plug-in will automatically generate a label for the transition. By
@@ -644,13 +650,13 @@ _Simple state table transition action._
 _Advanced state table transition action with additional form._
 
 ```php
-use App\States\Failed;
+use App\States\CancelledState;
 use Maartenpaauw\Filament\ModelStates\StateTableAction;
 
 // ...
 
-StateTableAction::make('fail')
-    ->transitionTo(Failed::class);
+StateTableAction::make('cancel')
+    ->transitionTo(CancelledState::class);
 ```
 
 When utilizing the `StateTableAction` component, this plug-in will automatically generate a label for the transition. By
@@ -838,14 +844,14 @@ action, you can chain the `->manager(CustomManager::class)` method after creatin
 
 ```php
 use App\States\CustomManager;
-use App\States\Failed;
+use App\States\CancelledState;
 use Maartenpaauw\Filament\ModelStates\StateAction;
 
 // ...
 
-StateAction::make('fail')
+StateAction::make('cancel')
     ->manager(CustomManager::class)
-    ->transitionTo(Failed::class);
+    ->transitionTo(CancelledState::class);
 ```
 
 ## Need Assistance?
