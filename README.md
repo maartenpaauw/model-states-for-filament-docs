@@ -1,7 +1,9 @@
 # Model states for Filament
 
 <p class="filament-hidden">
-  <img src="https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-banner.jpg" alt="Pennant for Filament">
+  <a href="https://checkout.anystack.sh/model-states-for-filament">
+    <img src="https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-banner.jpg" alt="Pennant for Filament">
+  </a>
 </p>
 
 ## Introduction
