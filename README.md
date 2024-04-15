@@ -835,7 +835,10 @@ interface Manager
 
     public function executePendingTransition(PendingTransition $pendingTransition): void;
 
-    public function scope(State $state): Scope;
+    /**
+     * @param  array<array-key, State>|State  $states
+     */
+    public function scope(State | array $states): Scope;
 
     public function validationRule(bool $required = true): ValidationRule;
 }
