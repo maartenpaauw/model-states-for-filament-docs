@@ -1,4 +1,4 @@
-# Model states for Filament
+# Model States for Filament
 
 <p class="filament-hidden">
   <a href="https://checkout.anystack.sh/model-states-for-filament">
@@ -26,7 +26,7 @@ out-of-the-box, providing a seamless solution for managing model states and tran
 
 ### Demo video
 
-[![Model states for Filament - Demo Video](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-demo-video.png "Demo Video")](https://www.youtube.com/watch?v=yy6AcehrVYI)
+[![Model States for Filament - Demo Video](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-demo-video.png "Demo Video")](https://www.youtube.com/watch?v=yy6AcehrVYI)
 
 Check out this video demonstrating how straightforward it is to transition from one valid state to another using
 Filament, with the following transitions in mind:
@@ -58,7 +58,7 @@ Model States for Filament comes packed with a range of features to enhance your 
 
 ## Installation
 
-**Thank you for choosing Model states for Filament!**
+**Thank you for choosing Model States for Filament!**
 
 Here's a comprehensive guide to installing and utilizing this plug-in. If you encounter any issues, have questions, need
 support, or want to request a feature, please feel free to contact me
@@ -92,7 +92,7 @@ To begin, add the private registry to your `composer.json`:
 }
 ```
 
-Once the repository is added, you can install Model states for Filament like any other composer package:
+Once the repository is added, you can install Model States for Filament like any other composer package:
 
 ```shell
 composer require maartenpaauw/model-states-for-filament
@@ -136,7 +136,7 @@ composer config http-basic.model-states-for-filament.composer.sh your_account_em
 ```
 
 You can see your credentials in your [Anystack.sh account](https://anystack.sh/): `Anystack -> Transactions -> View
-details` next to Model states for Filament.
+details` next to Model States for Filament.
 
 > [!IMPORTANT]
 > Make sure the `auth.json` file is in `.gitignore` to avoid leaking credentials into your git history.
@@ -484,7 +484,7 @@ In this paragraph, all available components and their features are listed.
 
 The `StateColumn` will display the related model state within a table.
 
-![Model states for Filament - State Column](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-column.png "State Column")
+![Model States for Filament - State Column](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-column.png "State Column")
 
 _State column with color and icon._
 
@@ -511,7 +511,7 @@ be used (e.g., `badge()`).
 
 The `StateEntry` will display the related model state within an infolist.
 
-![Model states for Filament - State Entry](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-entry.png "State Entry")
+![Model States for Filament - State Entry](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-entry.png "State Entry")
 
 _State entry with color and icon._
 
@@ -544,7 +544,7 @@ used (e.g., `badge()`).
 The `StateSelect` is a form component that enables selecting valid state transitions, disabling all other invalid state
 transitions. This component is intended for basic state transitions that do not require additional form fields.
 
-![Model states for Filament - State Select](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select.png "State Select")
+![Model States for Filament - State Select](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select.png "State Select")
 
 _State select with disabled invalid transitions._
 
@@ -578,7 +578,7 @@ Similar to the `StateSelect`, the `StateToggleButtons` is a form component that 
 transitions, disabling all other invalid state transitions. This component is intended for basic state transitions that
 do not require additional form fields.
 
-![Model states for Filament - State Toggle Buttons](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-toggle-buttons.png "State Toggle Buttons")
+![Model States for Filament - State Toggle Buttons](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-toggle-buttons.png "State Toggle Buttons")
 
 _State toggle buttons with disabled invalid transitions._
 
@@ -607,11 +607,11 @@ The `StateAction` component allows you to transition a state to another valid st
 confirmation dialogue, while advanced state transitions display an additional form before the transition can be
 performed.
 
-![Model states for Filament - State Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action.png "State Action")
+![Model States for Filament - State Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action.png "State Action")
 
 _Simple state transition action._
 
-![Model states for Filament - State Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action-with-form.png "State Action With Form")
+![Model States for Filament - State Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action-with-form.png "State Action With Form")
 
 _Advanced state transition action with additional form._
 
@@ -643,11 +643,11 @@ The `StateTableAction` component enables transitioning a state to another valid 
 display a confirmation dialogue, while advanced state transitions will show an additional form before the transition can
 be completed.
 
-![Model states for Filament - State Table Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action.png "State Table Action")
+![Model States for Filament - State Table Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action.png "State Table Action")
 
 _Simple state table transition action._
 
-![Model states for Filament - State Table Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action-with-form.png "State Table Action With Form")
+![Model States for Filament - State Table Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action-with-form.png "State Table Action With Form")
 
 _Advanced state table transition action with additional form._
 
@@ -677,7 +677,7 @@ used (e.g., `closeModalByClickingAway()`).
 
 The `StateSelectFilter` component filters table records by the selected state.
 
-![Model states for Filament - State Select Filter](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select-filter.png "State Select Filter")
+![Model States for Filament - State Select Filter](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select-filter.png "State Select Filter")
 
 _State select filter will all states listed._
 
@@ -704,7 +704,7 @@ be used (e.g., `multiple()`).
 
 The `StateGroup` adds functionality to group table records based on their status.
 
-![Model states for Filament - State Group](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-group.png "State Group")
+![Model States for Filament - State Group](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-group.png "State Group")
 
 _State group with label._
 
@@ -732,7 +732,7 @@ e.g., `label()`).
 The `StateTabs` component can be used to filter records using tabs. In addition to the state tabs, there will also be
 an "All" tab to list all records. The state tabs are alphabetically ordered.
 
-![Model states for Filament - State Tabs](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-tabs.png "State Tabs")
+![Model States for Filament - State Tabs](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-tabs.png "State Tabs")
 
 _State tabs with icon._
 
@@ -771,7 +771,7 @@ Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listi
 
 The `StateExportColumn` will add a column to Excel or CSV export with the related model state as the value.
 
-![Model states for Filament - State Export Column](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-export-column.png "State Export Column")
+![Model States for Filament - State Export Column](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-export-column.png "State Export Column")
 
 _State label in cell._
 
@@ -895,8 +895,8 @@ You will receive updates for the lifetime of the product.
 
 ### Code Distribution
 
-Please note that the licenses for Model states for Filament prohibit the public distribution of its source code. Hence,
-you cannot build and distribute applications using Model states for Filament's source code on open-source platforms.
+Please note that the licenses for Model States for Filament prohibit the public distribution of its source code. Hence,
+you cannot build and distribute applications using Model States for Filament's source code on open-source platforms.
 
 ### Questions About Licensing?
 
