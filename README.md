@@ -300,8 +300,8 @@ final class ToCancelled extends Transition implements FilamentSpatieTransition
 ```
 
 > [!WARNING]
-> Since the plug-in needs to create transition instances to determine if there is a `form`, all constructor properties
-> must have a default value.
+> Since the plug-in needs to create transition instances to determine if there is a form, all constructor properties,
+> except for the model, must have default values.
 
 By default, this plug-in will map the form component names to their constructor property names. Considering the
 previous `ToCancelled` transition, the `reason` textarea input will correspond to the constructor property `$reason`. If
