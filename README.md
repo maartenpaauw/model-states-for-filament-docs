@@ -861,17 +861,35 @@ invaluable.
 
 ## Licensing Information
 
-### Single License
+### Single Project License
 
-The single license permits the use of Model states for Filament in a single project hosted on a single domain or
-subdomain. It's suitable for personal websites or client-specific websites.
+The Single Project license allows for the utilization of Model States for Filament within a single project hosted on
+one domain or subdomain. It is suitable for personal websites or websites tailored to specific clients.
 
-For SaaS applications, you'll require an unlimited license.
+If you intend to incorporate Model States for Filament into a SaaS application, you must obtain an Unlimited Projects or
+Lifetime license.
 
-### Unlimited License
+Under the Single Project license, you are authorized to activate Model States for Filament up to 4 times (development,
+test, staging and production).
 
-The unlimited license allows the usage of Model states for Filament on multiple domains, subdomains, and even in SaaS
-applications.
+You will receive updates and bug fixes for one year from the purchase date. If you choose not to renew your license, you
+can only install the plug-in up to the latest version available before the license expiration. Renewing the license at a
+discounted rate allows you to continue receiving updates and new features.
+
+### Unlimited Projects License
+
+The Unlimited Projects license permits the utilization of Model States for Filament across multiple domains, subdomains,
+and even in SaaS applications.
+
+You will receive updates and bug fixes for one year from the purchase date. If you choose not to renew your license, you
+can only install the plug-in up to the latest version available before the license expiration. Renewing the license at a
+discounted rate allows you to continue receiving updates and new features.
+
+### Lifetime License
+
+The Lifetime License affords the licensee the same privileges as the Unlimited License.
+
+You will receive updates for the lifetime of the product.
 
 ### Code Distribution
 
