@@ -156,10 +156,6 @@ Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/01-introdu
 
 #### State Preparation
 
-> [!TIP]
-> More information about state configuration can be found in the official
-> Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states).
-
 When utilizing Spatie Laravel Model States, you'll have several abstract state classes. These abstract classes
 require certain modifications. To properly integrate them, it's necessary to implement the `FilamentSpatieState`
 interface and utilize the `ProvidesSpatieStateToFilament` trait.
@@ -196,11 +192,11 @@ abstract class OrderState extends State implements FilamentSpatieState
 }
 ```
 
-#### Transition Preparation
-
 > [!TIP]
-> For more information about transition configuration, refer to the official Spatie
-> [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
+> More information about state configuration can be found in the official
+> Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states).
+
+#### Transition Preparation
 
 Spatie Laravel model states offer support for custom transition classes. All custom transition classes must implement
 the `FilamentSpatieTransition` interface and use the `ProvidesSpatieTransitionToFilament` trait before they can be used
@@ -241,6 +237,10 @@ final class ToCancelled extends Transition implements FilamentSpatieTransition
     }
 }
 ```
+
+> [!TIP]
+> For more information about transition configuration, refer to the official Spatie
+> [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-transitions/02-custom-transition-classes).
 
 ##### Additional Transition Data
 
