@@ -811,6 +811,7 @@ namespace Maartenpaauw\Filament\ModelStates\Contracts;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Collection;
+use Maartenpaauw\Filament\ModelStates\Operator;
 
 interface Manager
 {
@@ -838,7 +839,7 @@ interface Manager
     /**
      * @param  array<array-key, State>|State  $states
      */
-    public function scope(State | array $states): Scope;
+    public function scope(State | array $states, Operator $operator): Scope;
 
     public function validationRule(bool $required = true): ValidationRule;
 }
