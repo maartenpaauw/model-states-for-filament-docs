@@ -700,6 +700,35 @@ be used (e.g., `multiple()`).
 > For more information about select filters, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/select).
 
+### Hide State Filter
+
+The `Hide State Filter` component adds a toggle filter which hides a specific state when enabled.
+
+![Model States for Filament - Hide State Filter](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-hide-state-filter.png "Hide State Filter")
+
+_Toggle filter which hides the cancelled state._
+
+```php
+use App\States\CancelledState;
+use Maartenpaauw\Filament\ModelStates\HideStateFilter;
+
+// ...
+
+HideStateFilter::make('hide_cancelled')
+    ->hiddenState(CancelledState::class);
+```
+
+When utilizing the `HideStateFilter` component, this plug-in will automatically generate a label for the filter. By
+default, "Hide" followed by the name of the state is used as the filter label. If you desire a custom label, you can
+publish the language files and change the `hide_state` translation.
+
+Because the `HideStateFilter` is based on the `Filter` component, all the familiar `Filter` modifiers can be used (
+e.g., `default()`).
+
+> [!TIP]
+> For more information about filters, refer to the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/custom).
+
 ### State Group
 
 The `StateGroup` adds functionality to group table records based on their status.
