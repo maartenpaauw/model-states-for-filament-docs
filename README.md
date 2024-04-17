@@ -702,7 +702,7 @@ be used (e.g., `multiple()`).
 
 ### Hide State Filter
 
-The `Hide State Filter` component adds a toggle filter which hides a specific state when enabled.
+The `HideStateFilter` component adds a toggle filter which hides a specific state when enabled.
 
 ![Model States for Filament - Hide State Filter](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-hide-state-filter.png "Hide State Filter")
 
