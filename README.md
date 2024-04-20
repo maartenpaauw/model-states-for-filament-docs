@@ -366,13 +366,13 @@ final class ToCancelled extends Transition implements FilamentSpatieTransition
 }
 ```
 
-#### Optional Label, Color and Icon
+#### Optional Label, Description, Color and Icon
 
 By default, the name of the state class is used as a label (for example, `CancelledState` will have the
-label `Cancelled`), without any assigned color or icon. If you desire a different label, color, or icon, you must
-implement the `HasLabel`, `HasColor`, or `HasIcon` interface.
+label `Cancelled`), without any assigned description, color or icon. If you desire a different label, description,
+color, or icon, you must implement the `HasLabel`, `HasDescription`, `HasColor`, or `HasIcon` interface.
 
-Here is an example of the `Cancelled` state with `HasLabel`, `HasColor`, and `HasIcon` implemented.
+Here is an example of the `Cancelled` state with `HasLabel`, `HasDescription`, `HasColor`, and `HasIcon` implemented.
 
 ```php
 <?php
@@ -381,10 +381,11 @@ namespace App\States;
 
 use Filament\Support\Colors\Color;
 use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasDescription;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
-final class CancelledState extends OrderState implements HasLabel, HasColor, HasIcon
+final class CancelledState extends OrderState implements HasDescription, HasColor, HasIcon, HasLabel
 {
     public function getLabel(): string
     {
@@ -400,8 +401,16 @@ final class CancelledState extends OrderState implements HasLabel, HasColor, Has
     {
         return 'heroicon-o-x-circle';
     }
+
+    public function getDescription(): ?string
+    {
+        return 'Order cancelled, transaction reversed.';
+    }
 }
 ```
+
+> [!NOTE]
+> The description is used when utilizing the `StateRadio` component.
 
 By default, "Transition to" followed by the name of the destination state is used as the transition label. Like states,
 it has no color or icon. If you want a different label, or if you want to use a color or icon; you have to implement
@@ -600,6 +609,44 @@ can be used (e.g., `inline()`).
 > [!TIP]
 > For more information about toggle buttons, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/toggle-buttons).
+
+### State Radio
+
+> [!CAUTION]
+> When using a state radio in combination with the Spatie integration, states aren't transitioned using the `Transition`
+> classes and are directly saved to the database like regular fields. Only use this radio when you are sure you are not
+> relying on `Transition` classes and `StateChanged` events.
+
+The `StateRadio` is a form component that enables choosing valid state transitions, disabling all other invalid state
+transitions. When the state class implements the `HasDescription` interface, the description is displayed underneath the
+state label. This component is intended for basic state transitions that do not require additional form fields.
+
+![Model States for Filament - State Radio](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-radio.png "State Radio")
+
+_State radio with disabled invalid transitions._
+
+![Model States for Filament - State Radio with Description](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-radio-with-description.png "State Radio with Description")
+
+_State radio with description and disabled invalid transitions._
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateRadio;
+
+// ...
+
+StateRadio::make('state')
+    ->inline();
+```
+
+When utilizing the `StateRadio` component, this plug-in will automatically list all states using their generated class
+name label. If you desire a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateRadio` is based on the `Radio` component, all the familiar `Radio` modifiers can be used (
+e.g., `inline()`).
+
+> [!TIP]
+> For more information about the radio input, refer to the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/radio).
 
 ### State Action
 
