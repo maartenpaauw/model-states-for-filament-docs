@@ -485,6 +485,13 @@ final class ToCancelled extends Transition implements FilamentSpatieTransition, 
 }
 ```
 
+#### Migrating Away from Enum States
+
+For each enum case, you have to create a state class. When you used string-backed enums, don't forget to add the public
+static string `$name` property. This is because, by default, Spatie Model States uses the fully qualified class name as
+the state representation and stores it in the database. To be backward compatible with the old enum values, you have to
+implement the static string property.
+
 ## Usage
 
 In this paragraph, all available components and their features are listed.
