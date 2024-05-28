@@ -695,6 +695,23 @@ used (e.g., `closeModalByClickingAway()`).
 > For more information about actions, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
 
+#### Different Attribute Name
+
+By default, this plug-in assumes the attribute where the state is stored is named `state`. If you wish to use a
+different attribute name, you can configure it using the `attribute()` method. For example, the following code uses the
+attribute `status` to store the model state.
+
+```php
+use App\States\CancelledState;
+use Maartenpaauw\Filament\ModelStates\StateAction;
+
+// ...
+
+StateAction::make('cancel')
+    ->attribute('status')
+    ->transitionTo(CancelledState::class);
+```
+
 ### State Table Action
 
 The `StateTableAction` component enables transitioning a state to another valid state. Basic transitions will only
@@ -730,6 +747,23 @@ used (e.g., `closeModalByClickingAway()`).
 > [!TIP]
 > For more information about table actions, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions).
+
+#### Different Attribute Name
+
+By default, this plug-in assumes the attribute where the state is stored is named `state`. If you wish to use a
+different attribute name, you can configure it using the `attribute()` method. For example, the following code uses the
+attribute `status` to store the model state.
+
+```php
+use App\States\CancelledState;
+use Maartenpaauw\Filament\ModelStates\StateTableAction;
+
+// ...
+
+StateTableAction::make('cancel')
+    ->attribute('status')
+    ->transitionTo(CancelledState::class);
+```
 
 ### State Select Filter
 
