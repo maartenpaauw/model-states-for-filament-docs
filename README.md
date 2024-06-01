@@ -554,6 +554,38 @@ used (e.g., `badge()`).
 > For more information about entries, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/infolists/entries/getting-started).
 
+### State Select Column
+
+> [!CAUTION]
+> When using a state select column in combination with the Spatie integration, states aren't transitioned using
+> the `Transition` classes and are directly saved to the database like regular fields. Only use this select when you are
+> sure you are not relying on `Transition` classes and `StateChanged` events.
+
+The `StateSelectColumn` is a table component that enables selecting valid state transitions, disabling all other invalid
+state transitions. This component is intended for basic state transitions that do not require additional form fields.
+
+![Model States for Filament - State Select Column](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select-column.png "State Select Column")
+
+_State select column with disabled invalid transitions._
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateSelectColumn;
+
+// ...
+
+StateSelectColumn::make('state');
+```
+
+When utilizing the `StateSelectColumn` component, this plug-in will automatically list all states using their generated
+class name label. If you desire a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateSelectColumn` is based on the `SelectColumn` component, all the familiar `Select` modifiers can be
+used (e.g., `label()`).
+
+> [!TIP]
+> For more information about select columns, refer to the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/columns/select).
+
 ### State Select
 
 > [!CAUTION]
