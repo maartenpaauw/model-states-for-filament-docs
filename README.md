@@ -896,7 +896,7 @@ use Maartenpaauw\Filament\ModelStates\StateTabs;
 
 public function getTabs(): array
 {
-    StateTabs::make($this->getModel())->toArray();
+    return StateTabs::make($this->getModel())->toArray();
 }
 ```
 
@@ -909,7 +909,7 @@ use Maartenpaauw\Filament\ModelStates\StateTabs;
 
 public function getTabs(): array
 {
-    StateTabs::make($this->getModel())
+    return StateTabs::make($this->getModel())
         ->includeAllTab(false)
         ->toArray();
 }
