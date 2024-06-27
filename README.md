@@ -882,6 +882,12 @@ e.g., `label()`).
 
 ### State Tabs
 
+> [!CAUTION]
+> When using state tabs in combination with the Spatie integration, states need to be serialized. Otherwise, when using
+> the fully qualified state name as a value, the backslashes will be removed, resulting in an invalid URL. For more
+> information about state serialization, refer to the official
+> Spatie [documentation](https://spatie.be/docs/laravel-model-states/v2/working-with-states/02-serializing-states).
+
 The `StateTabs` component can be used to filter records using tabs. In addition to the state tabs, there will also be
 an "All" tab to list all records. The state tabs are alphabetically ordered.
 
