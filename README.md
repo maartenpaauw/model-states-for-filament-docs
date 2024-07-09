@@ -62,7 +62,7 @@ Model States for Filament comes packed with a range of features to enhance your 
 
 Here's a comprehensive guide to installing and utilizing this plug-in. If you encounter any issues, have questions, need
 support, or want to request a feature, please feel free to contact me
-at [maartenpaauw@gmail.com](mailto:maartenpaauw@gmail.com).
+at [filamentphp@paauw.dev](mailto:filamentphp@paauw.dev).
 
 ### Requirements
 
@@ -1021,8 +1021,8 @@ StateAction::make('cancel')
 
 ## Need Assistance?
 
-Questions, bugs, feature requests, or suggestions? Feel free to contact me at maartenpaauw@gmail.com. Your feedback is
-invaluable.
+Questions, bugs, feature requests, or suggestions? Feel free to contact me
+at [filamentphp@paauw.dev](mailto:filamentphp@paauw.dev). Your feedback is invaluable.
 
 ## Licensing Information
 
@@ -1064,4 +1064,4 @@ you cannot build and distribute applications using Model States for Filament's s
 ### Questions About Licensing?
 
 If you're uncertain about which license is appropriate for your needs, don't hesitate to reach out. Contact me at
-maartenpaauw@gmail.com, and I'll be glad to assist you.
+[filamentphp@paauw.dev](mailto:filamentphp@paauw.dev), and I'll be glad to assist you.
