@@ -33,14 +33,14 @@ Filament, with the following transitions in mind:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> New
-    New --> Processing
-    New --> Canceled
-    Processing --> Shipped
-    Processing --> Canceled
-    Shipped --> Delivered
-    Delivered --> [*]
-    Canceled --> [*]
+  [*] --> New
+  New --> Processing
+  New --> Canceled
+  Processing --> Shipped
+  Processing --> Canceled
+  Shipped --> Delivered
+  Delivered --> [*]
+  Canceled --> [*]
 ```
 
 ## Features
@@ -83,12 +83,12 @@ To begin, add the private registry to your `composer.json`:
 
 ```json
 {
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://model-states-for-filament.composer.sh"
-        }
-    ]
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://model-states-for-filament.composer.sh"
+    }
+  ]
 }
 ```
 
@@ -955,10 +955,10 @@ modifiers can be used (e.g., `label()`).
 
 ## Advanced
 
-### Custom State Manager
+### Custom State Driver
 
-Would you like to use an alternative model state manager instead of Spatie Laravel model state? You can certainly do so.
-Simply create your own manager by creating a class that implements to the `Manager` interface.
+Would you like to use an alternative model state driver instead of Spatie Laravel model state? You can certainly do so.
+Simply create your own driver by creating a class that implements the following `Driver` interface.
 
 ```php
 <?php
@@ -972,40 +972,108 @@ use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Collection;
 use Maartenpaauw\Filament\ModelStates\Operator;
 
-interface Manager
+/**
+ * Manages state transitions and validation for models.
+ */
+interface Driver
 {
-    public static function make(Config $config): self;
-
-    public function currentState(): State;
-
-    public function defaultState(): ?State;
+    /**
+     * Get the current state of the model.
+     */
+    public function currentState(Config $config): State;
 
     /**
+     * Get the default state of the model.
+     */
+    public function defaultState(Config $config): ?State;
+
+    /**
+     * Get all possible states for the model.
+     *
      * @return Collection<string, State>
      */
-    public function allStates(): Collection;
-
-    public function transformState(mixed $state): State;
-
-    public function getTransition(PendingTransition $pendingTransition): Transition;
-
-    public function isValidPendingTransition(PendingTransition $pendingTransition): bool;
-
-    public function isInvalidPendingTransition(PendingTransition $pendingTransition): bool;
-
-    public function executePendingTransition(PendingTransition $pendingTransition): void;
+    public function allStates(Config $config): Collection;
 
     /**
+     * Transform a mixed value into a state instance.
+     */
+    public function transformState(Config $config, mixed $state): State;
+
+    /**
+     * Get the transition instance for a given pending transition.
+     */
+    public function getTransition(Config $config, PendingTransition $pendingTransition): Transition;
+
+    /**
+     * Check if a pending transition is valid.
+     */
+    public function isValidPendingTransition(Config $config, PendingTransition $pendingTransition): bool;
+
+    /**
+     * Check if a pending transition is invalid.
+     */
+    public function isInvalidPendingTransition(Config $config, PendingTransition $pendingTransition): bool;
+
+    /**
+     * Execute a pending transition.
+     */
+    public function executePendingTransition(Config $config, PendingTransition $pendingTransition): void;
+
+    /**
+     * Apply a scope to a query based on the given states and operator.
+     *
      * @param  array<array-key, State>|State  $states
      */
-    public function scope(State | array $states, Operator $operator): Scope;
+    public function scope(Config $config, State | array $states, Operator $operator): Scope;
 
-    public function validationRule(bool $required = true): ValidationRule;
+    /**
+     * Get the validation rule for a state attribute.
+     */
+    public function validationRule(Config $config, bool $required = true): ValidationRule;
 }
 ```
 
-After creating a custom manager, you can specify which manager to use per component. For example, when using the state
-action, you can chain the `->manager(CustomManager::class)` method after creating the `StateAction`.
+After creating a custom driver, you need to extend the state manager by adding the following code to a service provider:
+
+```php
+use App\States\CustomDriver;
+use Maartenpaauw\Filament\ModelStates\Contracts\Driver;
+use Maartenpaauw\Filament\ModelStates\Facades\StateManager;
+
+// ...
+
+StateManager::extend('custom-driver', static fn (): Driver => new CustomDriver());
+```
+
+After extending the state manager, you can specify which driver to use by changing the default configuration, simply by
+adding the following line of code to your `.env` file:
+
+```dotenv
+MODEL_STATES_DRIVER=custom-driver
+```
+
+If you wish to hardcode the default driver, you can export the plugin's configuration using the following command and
+replace the value of `driver`.
+
+```shell
+php artisan vendor:publish --tag="model-states-for-filament-config"
+```
+
+With the previous example in mind, your config will look like this:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'driver' => 'custom-driver',
+];
+```
+
+If your custom driver is only for a single component, you can change the driver by calling the `stateDriver()` method.
+For example, when using the `StateAction`, you can chain the `->stateDriver('custom-driver')` method after creating an
+instance of `StateAction`.
 
 ```php
 use App\States\CustomManager;
@@ -1015,7 +1083,7 @@ use Maartenpaauw\Filament\ModelStates\StateAction;
 // ...
 
 StateAction::make('cancel')
-    ->manager(CustomManager::class)
+    ->stateDriver('custom-driver')
     ->transitionTo(CancelledState::class);
 ```
 
