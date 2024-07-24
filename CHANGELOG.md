@@ -2,6 +2,13 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 2.0.1 - 2024-07-19
+
+### Fixed
+
+- Handle form closures correctly.
+- Do not use form data when validating transition.
+
 ## 2.0.0 - 2024-07-18
 
 ### Added
