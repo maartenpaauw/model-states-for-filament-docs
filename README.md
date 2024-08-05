@@ -33,14 +33,14 @@ Filament, with the following transitions in mind:
 
 ```mermaid
 stateDiagram-v2
-  [*] --> New
-  New --> Processing
-  New --> Canceled
-  Processing --> Shipped
-  Processing --> Canceled
-  Shipped --> Delivered
-  Delivered --> [*]
-  Canceled --> [*]
+    [*] --> New
+    New --> Processing
+    New --> Canceled
+    Processing --> Shipped
+    Processing --> Canceled
+    Shipped --> Delivered
+    Delivered --> [*]
+    Canceled --> [*]
 ```
 
 ## Features
@@ -52,6 +52,7 @@ Model States for Filament comes packed with a range of features to enhance your 
 - Grouping records by states.
 - Transitioning to valid states using select or toggle button components.
 - Transitioning to valid states using page and table actions.
+- Bulk transition to valid states using bulk actions.
 - Out-of-the-box support for
   the [Spatie Laravel Model States](https://spatie.be/docs/laravel-model-states/v2/01-introduction) package.
 - Compatible with dark mode.
@@ -83,12 +84,12 @@ To begin, add the private registry to your `composer.json`:
 
 ```json
 {
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://model-states-for-filament.composer.sh"
-    }
-  ]
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://model-states-for-filament.composer.sh"
+        }
+    ]
 }
 ```
 
@@ -795,6 +796,64 @@ use Maartenpaauw\Filament\ModelStates\StateTableAction;
 StateTableAction::make('cancel')
     ->attribute('status')
     ->transitionTo(CancelledState::class);
+```
+
+### State Bulk Action
+
+The `StateBulkAction` component enables bulk transitioning a state to another valid state. Basic transitions will only
+display a confirmation dialogue, while advanced state transitions will show an additional form before the transition can
+be completed.
+
+![Model States for Filament - State Table Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-bulk-action.png "State Bulk Action")
+
+_Simple state bulk transition action._
+
+![Model States for Filament - State Table Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-bulk-action-with-form.png "State Bulk Action With Form")
+
+_Advanced state bulk transition action with additional form._
+
+```php
+use App\States\NewState;
+use App\States\CancelledState;
+use Maartenpaauw\Filament\ModelStates\StateTableAction;
+
+// ...
+
+StateBulkAction::make('cancel')
+    ->transition(NewState::class, CancelledState::class);
+```
+
+When utilizing the `StateBulkAction` component, this plug-in will automatically generate a label for the transition. By
+default, "Transition to" followed by the name of the destination state is used as the transition label. If you desire a
+custom label, you can publish the language files and change the `transition_to_state` translation, or you can implement
+the `HasLabel` interface.
+
+It's important to note that when executing the bulk action, it only transitions records whose state matches the
+configured `from` state and where the `to` state is a valid transition. The other records are simply ignored.
+
+Because the `StateBulkAction` component is based on the `BulkAction` component, all the familiar `Action` modifiers can
+be used (e.g., `deselectRecordsAfterCompletion()`).
+
+> [!TIP]
+> For more information about bulk actions, refer to the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions#bulk-actions).
+
+#### Different Attribute Name
+
+By default, this plug-in assumes the attribute where the state is stored is named `state`. If you wish to use a
+different attribute name, you can configure it using the `attribute()` method. For example, the following code uses the
+attribute `status` to store the model state.
+
+```php
+use App\States\NewState;
+use App\States\CancelledState;
+use Maartenpaauw\Filament\ModelStates\StateTableAction;
+
+// ...
+
+StateBulkAction::make('cancel')
+    ->attribute('status')
+    ->transition(NewState::class, CancelledState::class);
 ```
 
 ### State Select Filter
