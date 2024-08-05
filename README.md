@@ -804,11 +804,11 @@ The `StateBulkAction` component enables bulk transitioning a state to another va
 display a confirmation dialogue, while advanced state transitions will show an additional form before the transition can
 be completed.
 
-![Model States for Filament - State Table Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-bulk-action.png "State Bulk Action")
+![Model States for Filament - State Bulk Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-bulk-action.png "State Bulk Action")
 
 _Simple state bulk transition action._
 
-![Model States for Filament - State Table Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-bulk-action-with-form.png "State Bulk Action With Form")
+![Model States for Filament - State Bulk Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-bulk-action-with-form.png "State Bulk Action With Form")
 
 _Advanced state bulk transition action with additional form._
 
