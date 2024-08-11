@@ -33,14 +33,14 @@ Filament, with the following transitions in mind:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> New
-    New --> Processing
-    New --> Canceled
-    Processing --> Shipped
-    Processing --> Canceled
-    Shipped --> Delivered
-    Delivered --> [*]
-    Canceled --> [*]
+  [*] --> New
+  New --> Processing
+  New --> Canceled
+  Processing --> Shipped
+  Processing --> Canceled
+  Shipped --> Delivered
+  Delivered --> [*]
+  Canceled --> [*]
 ```
 
 ## Features
@@ -149,6 +149,14 @@ Instead, you can set the credentials on the `Composer Package Authentication` sc
 
 In this paragraph, we list the steps you need to follow to get up and running with the out-of-the-box supported Spatie
 integration.
+
+### Publishing config
+
+You can publish the config file with the following command.
+
+```shell
+php artisan vendor:publish --tag="model-states-for-filament-config"
+```
 
 ### Spatie
 
@@ -1145,6 +1153,60 @@ StateAction::make('cancel')
     ->stateDriver('custom-driver')
     ->transitionTo(CancelledState::class);
 ```
+
+### Custom State Sorting Strategy
+
+To create a custom state sorting strategy , start by implementing the `StateSortingStrategy` interface. This interface
+requires you to define two methods: `withConfig` and `compare`. Here's an example:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Sorting;
+
+use Maartenpaauw\Filament\ModelStates\Contracts\StateSortingStrategy;
+use Maartenpaauw\Filament\ModelStates\Config;
+use Maartenpaauw\Filament\ModelStates\State;
+
+final class CustomStateSortingStrategy implements StateSortingStrategy
+{
+    private Config $config;
+
+    public function withConfig(Config $config): self
+    {
+        $this->config = $config;
+
+        return $this;
+    }
+
+    public function compare(State $a, State $b): int
+    {
+        // TODO: Custom sorting logic goes here...
+    }
+}
+```
+
+After implementing the strategy, configure it by setting the `state_sorting_strategy` to your custom class:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    // ...
+
+    'spatie' => [
+        'state_sorting_strategy' => \App\States\Sorting\CustomStateSortingStrategy::class,
+    ],
+
+    // ...
+];
+```
+
+With this configuration, your custom sorting strategy will be used wherever states are sorted in the plug-in.
 
 ## Need Assistance?
 

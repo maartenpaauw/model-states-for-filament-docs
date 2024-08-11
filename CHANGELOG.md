@@ -2,6 +2,35 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 2.3.0 - 2024-08-11
+
+### Added
+
+- State sorting functionality.
+
+## 2.2.0 - 2024-08-05
+
+### Added
+
+- State bulk action component.
+
+## 2.1.0 - 2024-08-03
+
+### Added
+
+- Display the state description as state column tooltip.
+- Display the state description as state entry tooltip.
+
+### Fixed
+
+- Add default name to hide state filter.
+
+## 2.0.2 - 2024-07-28
+
+### Fixed
+
+- Make trait getters protected.
+
 ## 2.0.1 - 2024-07-19
 
 ### Fixed
