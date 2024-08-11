@@ -84,12 +84,12 @@ To begin, add the private registry to your `composer.json`:
 
 ```json
 {
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://model-states-for-filament.composer.sh"
-        }
-    ]
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://model-states-for-filament.composer.sh"
+    }
+  ]
 }
 ```
 
@@ -126,6 +126,12 @@ The plug-in offers English and Dutch translations. You can publish the language 
 php artisan vendor:publish --tag="model-states-for-filament-translations"
 ```
 
+You can publish the config file with the following command and change the default configuration based on your needs.
+
+```shell
+php artisan vendor:publish --tag="model-states-for-filament-config"
+```
+
 ### Deploying
 
 It is not advised to store your `auth.json` file inside your project's version control repository. To store your
@@ -149,14 +155,6 @@ Instead, you can set the credentials on the `Composer Package Authentication` sc
 
 In this paragraph, we list the steps you need to follow to get up and running with the out-of-the-box supported Spatie
 integration.
-
-### Publishing config
-
-You can publish the config file with the following command.
-
-```shell
-php artisan vendor:publish --tag="model-states-for-filament-config"
-```
 
 ### Spatie
 
