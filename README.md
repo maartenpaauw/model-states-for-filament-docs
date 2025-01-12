@@ -182,6 +182,8 @@ use Spatie\ModelStates\StateConfig;
 
 /**
  * @extends State<Order>
+ *
+ * @implements FilamentSpatieState<Order>
  */
 abstract class OrderState extends State implements FilamentSpatieState
 {
@@ -734,6 +736,25 @@ used (e.g., `closeModalByClickingAway()`).
 > For more information about actions, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
 
+#### Relationship Support
+
+The `StateAction` component supports transitioning states within a related model using relationships. This functionality
+is helpful when your state resides in a related model instead of the primary model being worked on.
+
+To transition a state within a related model, you can use the `stateRelationship()` method. This method specifies the
+relationship on the primary model that points to the related model holding the state.
+
+```php
+use App\States\CancelledState;
+use Maartenpaauw\Filament\ModelStates\StateAction;
+
+// ...
+
+StateAction::make('cancel')
+    ->stateRelationship('order')
+    ->transitionTo(CancelledState::class);
+```
+
 #### Different Attribute Name
 
 By default, this plug-in assumes the attribute where the state is stored is named `state`. If you wish to use a
@@ -787,6 +808,25 @@ used (e.g., `closeModalByClickingAway()`).
 > For more information about table actions, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions).
 
+#### Relationship Support
+
+The `StateTableAction` component supports transitioning states within a related model using relationships. This
+functionality is helpful when your state resides in a related model instead of the primary model being worked on.
+
+To transition a state within a related model, you can use the `stateRelationship()` method. This method specifies the
+relationship on the primary model that points to the related model holding the state.
+
+```php
+use App\States\CancelledState;
+use Maartenpaauw\Filament\ModelStates\StateTableAction;
+
+// ...
+
+StateTableAction::make('cancel')
+    ->stateRelationship('order')
+    ->transitionTo(CancelledState::class);
+```
+
 #### Different Attribute Name
 
 By default, this plug-in assumes the attribute where the state is stored is named `state`. If you wish to use a
@@ -821,7 +861,7 @@ _Advanced state bulk transition action with additional form._
 ```php
 use App\States\NewState;
 use App\States\CancelledState;
-use Maartenpaauw\Filament\ModelStates\StateTableAction;
+use Maartenpaauw\Filament\ModelStates\StateBulkAction;
 
 // ...
 
@@ -844,6 +884,26 @@ be used (e.g., `deselectRecordsAfterCompletion()`).
 > For more information about bulk actions, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions#bulk-actions).
 
+#### Relationship Support
+
+The `StateBulkAction` component supports transitioning states within a related model using relationships. This
+functionality is helpful when your state resides in a related model instead of the primary model being worked on.
+
+To transition a state within a related model, you can use the `stateRelationship()` method. This method specifies the
+relationship on the primary model that points to the related model holding the state.
+
+```php
+use App\States\NewState;
+use App\States\CancelledState;
+use Maartenpaauw\Filament\ModelStates\StateBulkAction;
+
+// ...
+
+StateBulkAction::make('cancel')
+    ->stateRelationship('order')
+    ->transition(NewState::class, CancelledState::class);
+```
+
 #### Different Attribute Name
 
 By default, this plug-in assumes the attribute where the state is stored is named `state`. If you wish to use a
@@ -853,7 +913,7 @@ attribute `status` to store the model state.
 ```php
 use App\States\NewState;
 use App\States\CancelledState;
-use Maartenpaauw\Filament\ModelStates\StateTableAction;
+use Maartenpaauw\Filament\ModelStates\StateBulkAction;
 
 // ...
 
@@ -889,6 +949,24 @@ be used (e.g., `multiple()`).
 > For more information about select filters, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/select).
 
+#### Relationship Support
+
+The `StateSelectFilter` component supports filtering based on states within related models. This feature is particularly
+useful when you need to filter records based on the state of a related model instead of the primary model.
+
+To filter by the state of a related model, use the `stateRelationship()` method to specify the relationship on the
+primary model that points to the related model holding the state. For example:
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateSelectFilter;
+
+// ...
+
+StateSelectFilter::make('state')
+    ->stateRelationship('order')
+    ->multiple();
+```
+
 ### Hide State Filter
 
 The `HideStateFilter` component adds a toggle filter which hides a specific state when enabled.
@@ -917,6 +995,25 @@ e.g., `default()`).
 > [!TIP]
 > For more information about filters, refer to the official
 > Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/custom).
+
+#### Relationship Support
+
+The `HideStateFilter` component supports filtering based on states within related models. This feature is particularly
+useful when you need to filter records based on the state of a related model instead of the primary model.
+
+To filter by the state of a related model, use the `stateRelationship()` method to specify the relationship on the
+primary model that points to the related model holding the state. For example:
+
+```php
+use App\States\CancelledState;
+use Maartenpaauw\Filament\ModelStates\HideStateFilter;
+
+// ...
+
+HideStateFilter::make('hide_cancelled')
+    ->stateRelationship('order')
+    ->hiddenState(CancelledState::class);
+```
 
 ### State Group
 
@@ -971,6 +1068,8 @@ public function getTabs(): array
 }
 ```
 
+#### All Tab
+
 If you prefer not to include the "All" tab mentioned above, you can chain the `includeAllTab(false)` method.
 
 ```php
@@ -990,6 +1089,27 @@ public function getTabs(): array
 > For more information about state tabs, refer to the official
 >
 Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
+
+#### Relationship Support
+
+The `StateTabs` component supports filtering based on states within related models. This feature is particularly useful
+when you need to filter records based on the state of a related model instead of the primary model.
+
+To filter by the state of a related model, use the `stateRelationship()` method to specify the relationship on the
+primary model that points to the related model holding the state. For example:
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateTabs;
+
+// ...
+
+public function getTabs(): array
+{
+    return StateTabs::make($this->getModel())
+      ->stateRelationship('order')
+      ->toArray();
+}
+```
 
 ### State Export Column
 

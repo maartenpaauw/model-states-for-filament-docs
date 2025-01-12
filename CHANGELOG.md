@@ -2,6 +2,35 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 2.5.0 - 2025-01-12
+
+### Added
+
+- Relationship support for state tabs.
+- Relationship support for hide state filter.
+- Relationship support for state select filter.
+- Relationship support for state action.
+- Relationship support for state table action.
+- Relationship support for state bulk action.
+
+## 2.4.0 - 2024-12-06
+
+### Added
+
+- Display the state description as state group description.
+
+## 2.3.2 - 2024-08-21
+
+### Added
+
+- Use override attribute when overriding or implementing methods.
+
+## 2.3.1 - 2024-08-20
+
+### Changed
+
+- Simplify Spatie query logic with `whereIn` and `whereNotIn`.
+
 ## 2.3.0 - 2024-08-11
 
 ### Added
