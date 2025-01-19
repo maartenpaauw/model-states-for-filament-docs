@@ -1015,6 +1015,33 @@ HideStateFilter::make('hide_cancelled')
     ->hiddenState(CancelledState::class);
 ```
 
+### State Select Constraint
+
+The `StateSelectConstraint` component filters table records by the selected state.
+
+![Model States for Filament - State Select Constraint](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-select-constraint.png "State Select Constraint")
+
+_State select constraint will all states listed._
+
+```php
+use Maartenpaauw\Filament\ModelStates\StateSelectConstraint;
+
+// ...
+
+StateSelectConstraint::make('state')
+    ->multiple();
+```
+
+When utilizing the `StateSelectConstraint` component, this plug-in will automatically list all states using their
+generated class name label. If you desire a custom label, you can implement the `HasLabel` interface.
+
+Because the `StateSelectConstraint` is based on the `SelectConstraint` component, all the familiar `SelectConstraint`
+modifiers can be used (e.g., `inverse()`).
+
+> [!TIP]
+> For more information about select constraints, refer to the official
+> Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/query-builder#select-constraints).
+
 ### State Group
 
 The `StateGroup` adds functionality to group table records based on their status.

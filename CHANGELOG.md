@@ -2,6 +2,12 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 2.6.0 - 2025-01-19
+
+### Added
+
+- State select constraint.
+
 ## 2.5.0 - 2025-01-12
 
 ### Added
