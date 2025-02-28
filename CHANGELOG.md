@@ -2,6 +2,21 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 3.0.0 - 2025-02-28
+
+### Added
+
+- Support for Laravel 12.
+
+### Changed
+
+- Removed `NotIn` case and added `Equal` and `NotEqual` cases to `Operator` enum.
+
+### Removed
+
+- Support for Laravel 10.
+- Support for PHP 8.1.
+
 ## 2.6.0 - 2025-01-19
 
 ### Added

@@ -1,5 +1,26 @@
 # Upgrading
 
+# From v2 to v3
+
+## Changes To `Operator` Enum Cases
+
+### Changes
+- Added
+   - `Equal`
+   - `NotEqual`
+- Removed
+   - `NotIn`
+
+### Impact on Custom Drivers
+
+If your custom driver relies on the `Operator` enum, update the following:
+
+- **Replace `NotIn` usage** with alternative exclusion logic.
+- **Ensure support for `Equal` and `NotEqual`** in operator handling.
+- **Review switch cases and conditionals** to accommodate these changes.
+
+Update your implementation accordingly to maintain compatibility.
+
 # From v1 to v2
 
 > [!TIP]

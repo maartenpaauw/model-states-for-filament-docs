@@ -67,10 +67,10 @@ at [filamentphp@paauw.dev](mailto:filamentphp@paauw.dev).
 
 ### Requirements
 
-- PHP `^8.1`
-- Laravel `^10.0` or `^11.0`
+- PHP `^8.2`
+- Laravel `^11.0` or `^12.0`
 - Filament `^3.2.39`
-- Spatie Laravel model states `^2.7`
+- Spatie Laravel model states `^2.11.1`
 
 Additionally, make sure you have configured at least one Spatie Laravel model state in your project. For more
 information, refer to the official
