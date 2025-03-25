@@ -2,6 +2,12 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 3.0.1 - 2025-03-25
+
+### Fixed
+
+- Updated Spatie validation rule to be compatible with `v2.11.2`.
+
 ## 3.0.0 - 2025-02-28
 
 ### Added
