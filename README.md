@@ -294,7 +294,7 @@ final class ToCancelled extends Transition implements FilamentSpatieTransition
         return $this->order;
     }
 
-    public function form(): array | Closure | null
+    public function schema(): array | Closure | null
     {
         return [
             Textarea::make('reason')
@@ -534,7 +534,7 @@ be used (e.g., `badge()`).
 
 > [!TIP]
 > For more information about columns, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/columns/getting-started).
+> Filament [documentation](https://filamentphp.com/docs/4.x/tables/columns/overview).
 
 ### State Entry
 
@@ -561,7 +561,7 @@ used (e.g., `badge()`).
 
 > [!TIP]
 > For more information about entries, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/infolists/entries/getting-started).
+> Filament [documentation](https://filamentphp.com/docs/4.x/infolists/overview).
 
 ### State Select Column
 
@@ -593,7 +593,7 @@ used (e.g., `label()`).
 
 > [!TIP]
 > For more information about select columns, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/columns/select).
+> Filament [documentation](https://filamentphp.com/docs/4.x/tables/columns/select).
 
 ### State Select
 
@@ -626,7 +626,7 @@ e.g., `native()`).
 
 > [!TIP]
 > For more information about selects, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/select).
+> Filament [documentation](https://filamentphp.com/docs/4.x/forms/select).
 
 ### State Toggle Buttons
 
@@ -660,7 +660,7 @@ can be used (e.g., `inline()`).
 
 > [!TIP]
 > For more information about toggle buttons, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/toggle-buttons).
+> Filament [documentation](https://filamentphp.com/docs/4.x/forms/toggle-buttons).
 
 ### State Radio
 
@@ -698,13 +698,13 @@ e.g., `inline()`).
 
 > [!TIP]
 > For more information about the radio input, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/forms/fields/radio).
+> Filament [documentation](https://filamentphp.com/docs/4.x/forms/radio).
 
 ### State Action
 
 The `StateAction` component allows you to transition a state to another valid state. Basic transitions will only show a
 confirmation dialogue, while advanced state transitions display an additional form before the transition can be
-performed.
+performed. This component works seamlessly on both pages and tables.
 
 ![Model States for Filament - State Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action.png "State Action")
 
@@ -713,6 +713,14 @@ _Simple state transition action._
 ![Model States for Filament - State Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-action-with-form.png "State Action With Form")
 
 _Advanced state transition action with additional form._
+
+![Model States for Filament - State Table Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action.png "State Table Action")
+
+_Simple state transition action in a table._
+
+![Model States for Filament - State Table Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action-with-form.png "State Table Action With Form")
+
+_Advanced state transition action with additional form in a table._
 
 ```php
 use App\States\CancelledState;
@@ -734,7 +742,8 @@ used (e.g., `closeModalByClickingAway()`).
 
 > [!TIP]
 > For more information about actions, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/actions/overview).
+> Filament [documentation](https://filamentphp.com/docs/4.x/actions/overview)
+> and [table actions documentation](https://filamentphp.com/docs/4.x/tables/actions).
 
 #### Relationship Support
 
@@ -768,78 +777,6 @@ use Maartenpaauw\Filament\ModelStates\StateAction;
 // ...
 
 StateAction::make('cancel')
-    ->attribute('status')
-    ->transitionTo(CancelledState::class);
-```
-
-### State Table Action
-
-The `StateTableAction` component enables transitioning a state to another valid state. Basic transitions will only
-display a confirmation dialogue, while advanced state transitions will show an additional form before the transition can
-be completed.
-
-![Model States for Filament - State Table Action](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action.png "State Table Action")
-
-_Simple state table transition action._
-
-![Model States for Filament - State Table Action With Form](https://raw.githubusercontent.com/maartenpaauw/model-states-for-filament-docs/main/assets/images/model-states-for-filament-state-table-action-with-form.png "State Table Action With Form")
-
-_Advanced state table transition action with additional form._
-
-```php
-use App\States\CancelledState;
-use Maartenpaauw\Filament\ModelStates\StateTableAction;
-
-// ...
-
-StateTableAction::make('cancel')
-    ->transitionTo(CancelledState::class);
-```
-
-When utilizing the `StateTableAction` component, this plug-in will automatically generate a label for the transition. By
-default, "Transition to" followed by the name of the destination state is used as the transition label. If you desire a
-custom label, you can publish the language files and change the `transition_to_state` translation, or you can implement
-the `HasLabel` interface.
-
-Because the `StateTableAction` component is based on the `Action` component, all the familiar `Action` modifiers can be
-used (e.g., `closeModalByClickingAway()`).
-
-> [!TIP]
-> For more information about table actions, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions).
-
-#### Relationship Support
-
-The `StateTableAction` component supports transitioning states within a related model using relationships. This
-functionality is helpful when your state resides in a related model instead of the primary model being worked on.
-
-To transition a state within a related model, you can use the `stateRelationship()` method. This method specifies the
-relationship on the primary model that points to the related model holding the state.
-
-```php
-use App\States\CancelledState;
-use Maartenpaauw\Filament\ModelStates\StateTableAction;
-
-// ...
-
-StateTableAction::make('cancel')
-    ->stateRelationship('order')
-    ->transitionTo(CancelledState::class);
-```
-
-#### Different Attribute Name
-
-By default, this plug-in assumes the attribute where the state is stored is named `state`. If you wish to use a
-different attribute name, you can configure it using the `attribute()` method. For example, the following code uses the
-attribute `status` to store the model state.
-
-```php
-use App\States\CancelledState;
-use Maartenpaauw\Filament\ModelStates\StateTableAction;
-
-// ...
-
-StateTableAction::make('cancel')
     ->attribute('status')
     ->transitionTo(CancelledState::class);
 ```
@@ -882,7 +819,7 @@ be used (e.g., `deselectRecordsAfterCompletion()`).
 
 > [!TIP]
 > For more information about bulk actions, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/actions#bulk-actions).
+> Filament [documentation](https://filamentphp.com/docs/4.x/tables/actions#bulk-actions).
 
 #### Relationship Support
 
@@ -947,7 +884,7 @@ be used (e.g., `multiple()`).
 
 > [!TIP]
 > For more information about select filters, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/select).
+> Filament [documentation](https://filamentphp.com/docs/4.x/tables/filters/select).
 
 #### Relationship Support
 
@@ -994,7 +931,7 @@ e.g., `default()`).
 
 > [!TIP]
 > For more information about filters, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/custom).
+> Filament [documentation](https://filamentphp.com/docs/4.x/tables/filters/custom).
 
 #### Relationship Support
 
@@ -1040,7 +977,7 @@ modifiers can be used (e.g., `inverse()`).
 
 > [!TIP]
 > For more information about select constraints, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/filters/query-builder#select-constraints).
+> Filament [documentation](https://filamentphp.com/docs/4.x/tables/filters/query-builder#select-constraints).
 
 ### State Group
 
@@ -1067,7 +1004,7 @@ e.g., `label()`).
 
 > [!TIP]
 > More information about groups can be found on the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/tables/grouping).
+> Filament [documentation](https://filamentphp.com/docs/4.x/tables/grouping).
 
 ### State Tabs
 
@@ -1115,7 +1052,7 @@ public function getTabs(): array
 > [!TIP]
 > For more information about state tabs, refer to the official
 >
-Filament [documentation](https://filamentphp.com/docs/3.x/panels/resources/listing-records#using-tabs-to-filter-the-records).
+Filament [documentation](https://filamentphp.com/docs/4.x/resources/listing-records#using-tabs-to-filter-the-records).
 
 #### Relationship Support
 
@@ -1163,7 +1100,7 @@ modifiers can be used (e.g., `label()`).
 
 > [!TIP]
 > For more information about exports, refer to the official
-> Filament [documentation](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/export).
+> Filament [documentation](https://filamentphp.com/docs/4.x/actions/export).
 
 ## Advanced
 

@@ -2,6 +2,24 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 4.0.0 - 2025-08-20
+
+### Added
+
+- Full support for Filament version 4.
+- State action and state bulk action components now automatically display transition descriptions as tooltips.
+- State select column now shows state descriptions in tooltips for a better user experience.
+
+### Changed
+
+- Renamed the `form()` method to `schema()` in transition classes for consistency with Filament 4 conventions.
+
+### Removed
+
+- The `StateTableAction` component has been removed. Use `StateAction` instead, which now works seamlessly on both pages
+  and tables.
+- Dropped compatibility with Filament version 3. Upgrade to Filament version 4 is required.
+
 ## 3.0.1 - 2025-03-25
 
 ### Fixed

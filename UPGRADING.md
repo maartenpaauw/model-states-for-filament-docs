@@ -1,15 +1,147 @@
 # Upgrading
 
+## From v3 to v4
+
+This guide will help you upgrade from Model States for Filament v3 to v4, which adds support for Filament v4 and
+introduces several improvements.
+
+> [!WARNING]
+> Version 4.0.0 introduces breaking changes. Please review this guide carefully and test your upgrade in a development
+> environment first.
+
+**Backup:** Always back up your application before upgrading.
+
+### Step 1: Upgrade Filament to v4
+
+First, upgrade your Filament installation to v4 following
+the [official upgrade guide](https://filamentphp.com/docs/4.x/support/upgrade-guide). Model States for Filament v4 is
+**only compatible with Filament v4**.
+
+### Step 2: Update Dependencies
+
+Update your `composer.json` to require the new version:
+
+```bash
+composer require maartenpaauw/model-states-for-filament:^4.0
+```
+
+### Step 3: Update Transition Classes
+
+The method for defining transition forms has been renamed from `form()` to `schema()`:
+
+**Before (v3):**
+
+```php
+public function form(): array | Closure | null
+{
+    return [
+        Textarea::make('reason')
+            ->required()
+            ->minLength(1)
+            ->maxLength(1000)
+            ->rows(5)
+            ->helperText(__('This reason will be sent to the customer.')),
+    ];
+}
+```
+
+**After (v4):**
+
+```php
+public function schema(): array | Closure | null
+{
+    return [
+        Textarea::make('reason')
+            ->required()
+            ->minLength(1)
+            ->maxLength(1000)
+            ->rows(5)
+            ->helperText(__('This reason will be sent to the customer.')),
+    ];
+}
+```
+
+Find all your transition classes and update them.
+
+### Step 4: Replace StateTableAction
+
+`StateTableAction` has been removed and consolidated into `StateAction`. The `StateAction` component now works
+seamlessly on both pages and tables.
+
+**Before (v3):**
+
+```php
+// For pages
+StateAction::make('cancel')
+    ->transitionTo(CancelledState::class);
+
+// For tables
+StateTableAction::make('cancel')
+    ->transitionTo(CancelledState::class);
+```
+
+**After (v4):**
+
+```php
+// Works for both pages and tables
+StateAction::make('cancel')
+    ->transitionTo(CancelledState::class);
+```
+
+Find and replace all instances:
+
+- `use Maartenpaauw\Filament\ModelStates\StateTableAction;` → `use Maartenpaauw\Filament\ModelStates\StateAction;`
+- `StateTableAction::make(...)` → `StateAction::make(...)`
+
+### Step 5: Test Your Application
+
+After completing the upgrade:
+
+1. Clear your application cache:
+
+   ```bash
+   php artisan cache:clear
+   php artisan config:clear
+   php artisan view:clear
+   ```
+
+2. Test all state transitions in your application
+3. Verify forms are working correctly with the new `schema()` method
+4. Check that table actions still function properly
+5. Verify that tooltips are displaying correctly (automatic feature)
+
+### Troubleshooting
+
+#### Common Issues
+
+**Transition forms not displaying:** Ensure you've renamed `form()` to `schema()` in all transition classes.
+
+**Table actions not working:** Replace `StateTableAction` with `StateAction`.
+
+#### Getting Help
+
+If you encounter issues during the upgrade:
+
+1. Check that all breaking changes have been addressed
+2. Review the changelog for additional context
+3. Check the package documentation for the latest examples
+4. Verify Filament v4 is properly installed
+5. Clear all application caches
+
+The upgrade process is straightforward, with most changes being simple method renames and import updates. The enhanced
+features and Filament v4 compatibility make this upgrade highly recommended for all users.
+
 # From v2 to v3
 
 ## Changes To `Operator` Enum Cases
 
 ### Changes
+
 - Added
-   - `Equal`
-   - `NotEqual`
+    - `Equal`
+    - `NotEqual`
 - Removed
-   - `NotIn`
+    - `NotIn`
 
 ### Impact on Custom Drivers
 
