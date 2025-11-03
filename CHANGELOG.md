@@ -2,6 +2,12 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 4.0.1 - 2025-11-03
+
+### Fixed
+
+- Correctly retrieve the model for state select constraint for Filament version 4.2 and above.
+
 ## 4.0.0 - 2025-08-20
 
 ### Added
