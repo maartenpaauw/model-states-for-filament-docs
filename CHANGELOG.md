@@ -2,6 +2,12 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 4.0.2 - 2025-11-28
+
+### Fixed
+
+- Update state and transition icons to handle HTML-able icons correctly.
+
 ## 4.0.1 - 2025-11-03
 
 ### Fixed
