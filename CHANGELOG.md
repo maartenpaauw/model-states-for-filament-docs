@@ -2,6 +2,12 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 4.0.3 - 2025-12-15
+
+### Fixed
+
+- Separate a transition into two states with Spatie's new `->` delimiter.
+
 ## 4.0.2 - 2025-11-28
 
 ### Fixed
