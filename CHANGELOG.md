@@ -2,6 +2,13 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 4.1.0 - 2025-12-30
+
+### Added
+
+- Support for PHP version 8.5.
+- Support for Webmozart's assert version 2.
+
 ## 4.0.3 - 2025-12-15
 
 ### Fixed
