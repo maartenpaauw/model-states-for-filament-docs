@@ -2,6 +2,12 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 4.1.1 - 2026-01-19
+
+### Added
+
+- Support for Filament version 5.
+
 ## 4.1.0 - 2025-12-30
 
 ### Added
