@@ -2,6 +2,16 @@
 
 All notable changes to `model-states-for-filament` will be documented in this file.
 
+## 4.2.0 - 2026-03-23
+
+### Added
+
+- Support for Laravel 13.
+
+### Removed
+
+- Support for Laravel 11.
+
 ## 4.1.1 - 2026-01-19
 
 ### Added
